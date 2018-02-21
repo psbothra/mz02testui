@@ -13,8 +13,9 @@
   "dependencies": {
     "auth0-js": "^9.2.3",
     "axios": "^0.17.1",
-    "express": "^4.16.2",
     "event-emitter3": "^1.0.4",
+    "express": "^4.16.2",
+    "jwt-decode": "^2.2.0",
     "mongodb-stitch": "^3.0.2",
     "vimeo": "^2.0.0",
     "vue": "^2.5.2",
