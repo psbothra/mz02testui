@@ -13,9 +13,12 @@
   "dependencies": {
     "auth0-js": "^9.2.3",
     "axios": "^0.17.1",
-    "express": "^4.16.2",
     "event-emitter3": "^1.0.4",
+    "express": "^4.16.2",
+    "firebase": "^4.10.0",
     "mongodb-stitch": "^3.0.2",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "vimeo": "^2.0.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
