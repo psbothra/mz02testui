@@ -14,7 +14,7 @@ exports.dbconnection = function (req, res) {
         docUrl: docUrl,
         }}, {upsert:true})
       ).then(() =>
-        db.collection('test').findOne({name : name})
+        db.collection('test').find()
       ).then(docs => {
         console.log("Found docs", docs)
         res.send(docs)
