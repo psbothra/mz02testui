@@ -85,7 +85,7 @@ export default {
         this.docUrl = URL.createObjectURL(event.target.files[0])
       },
       callupload () {
-        axios.get(`http://127.0.0.1:8000/uploadvideo`)
+        axios.get(`https://mz02testui.herokuapp.com/uploadvideo`)
           .then(response => {
             console.log(response.data)
             this.video_redirect = response.data
@@ -98,7 +98,7 @@ export default {
       },
 
       calldb () {
-        axios.get(`http://127.0.0.1:8000/connection`)
+        axios.get(`https://mz02testui.herokuapp.com/connection`)
           .then(response => {
             console.log(response.data)
             this.db_connect = response.data
@@ -108,7 +108,7 @@ export default {
           })
       },
       uploaddocument (x, y) {
-        axios.get(`http://127.0.0.1:8000/uploaddoc`, {
+        axios.get(`https://mz02testui.herokuapp.com/uploaddoc`, {
           params: {
             docObj: x,
             docUrl: y

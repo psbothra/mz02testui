@@ -53,7 +53,7 @@ export default {
       ]),
 
       calllogin () {
-        axios.get(`http://127.0.0.1:8000/login`)
+        axios.get(`https://mz02testui.herokuapp.com/login`)
           .then(response => {
             console.log(response)
           })
@@ -62,7 +62,7 @@ export default {
           })
       },
       calllogout () {
-        axios.get(`http://127.0.0.1:8000/logout`)
+        axios.get(`https://mz02testui.herokuapp.com/logout`)
           .then(response => {
             console.log(response.data)
           })
@@ -71,7 +71,7 @@ export default {
           })
       },
       calldb () {
-        axios.get(`http://127.0.0.1:8000/connection`)
+        axios.get(`https://mz02testui.herokuapp.com/connection`)
           .then(response => {
             console.log(response.data)
             this.db_connect = response.data
