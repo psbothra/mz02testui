@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
-    <div align="centre" class= "pb-5">
-      <h1> This is for demo purpose
+  <div>
+    <div class= "pb-5 pt-5" align="center">
+      <h1> This is for demo purpose<br><br>
       </h1>
-      <h4 class="pl-5 pr-5">
-        The admin panel here cntain the features to upload the documents and the videos.<br>
-        The login button authenticates the user with the API auth0. And there you have access to the documents and the videos.
+      <h4>
+        The admin panel here contain the features to upload the documents and the videos.<br>
+        The login button authenticates the user with the API auth0.<br> And there you have access to the documents and the videos.<br>
         The training data is fetched from the database mongodb.
     </h4>
 
@@ -16,7 +16,6 @@
 <script>
 
 export default {
-  name: 'Home',
   data () {
     return {}
   }}

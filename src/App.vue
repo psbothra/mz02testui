@@ -1,6 +1,7 @@
 <template>
-  <div id="app" align="right">
+  <div id="app">
     <header>
+      <div align="right">
       <button
           class="btn btn-primary btn-margin"
           v-if="!authenticated"
@@ -21,6 +22,7 @@
           @click="logout()">
             Log Out
         </button>
+      </div>
     </header>
     <main>
       <router-view
