@@ -15,7 +15,7 @@
     "axios": "^0.17.1",
     "event-emitter3": "^1.0.4",
     "express": "^4.16.2",
-    "firebase": "^4.10.0",
+    "firebase": "^4.10.1",
     "jwt-decode": "^2.2.0",
     "mongodb-stitch": "^3.0.2",
     "stylus": "^0.54.5",
