@@ -5,11 +5,13 @@ const state = {
   btnLoader: false,
   firebaseApp: {},
   storage: {},
-  coursedata: {}
+  coursedata: {},
+  f1: false
 }
 
 const getters = {
-  btnLoader: state => state.btnLoader
+  btnLoader: state => state.btnLoader,
+  coursedata: state => state.coursedata
 }
 
 const mutations = {
@@ -33,7 +35,7 @@ const mutations = {
 
                 actions.uploaddoc(state, docBind).then((result3) => {
                   if (result3) {
-                    axios.get('http://127.0.0.1:5000/connection', {
+                    axios.get('https://mz02test.herokuapp.com/connection', {
                       params: {
                         name: payload.name,
                         description: payload.description,
@@ -42,10 +44,25 @@ const mutations = {
                     })
                       .then(function (response) {
                         console.log(response)
+                        state.coursedata[response.data._id] = {
+                          name: response.data.name,
+                          desc: response.data.description,
+                          docUrl: response.data.docUrl
+                        }
+                        console.log(state.coursedata)
+
+                        state.f1 = true
+                        setTimeout(function () {
+                          state.f1 = false
+                        }, 1000)
                         state.btnLoader = false
                       })
                       .catch(function (error) {
                         console.log(error)
+                        state.f1 = true
+                        setTimeout(function () {
+                          state.f1 = false
+                        }, 1000)
                         state.btnLoader = false
                       })
                   }
@@ -56,6 +73,10 @@ const mutations = {
         })
       }
     })
+  },
+
+  insertdata (state, payload) {
+    console.log(payload)
   }
 
 }
