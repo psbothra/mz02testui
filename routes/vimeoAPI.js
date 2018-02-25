@@ -21,6 +21,8 @@ exports.createuploadVideoRequest = function (req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   var headers = { 'Authorization': '5716aab30da741f33ae51c95d044f354', 'Content-Type': 'application/json'}
+  let url = req.query.url
+  let redirect_url = 'https://mz02test.herokuapp.com/AddData/' + url
 
   // set credentials
 /*  var client = new Vimeo('302b1711ccd9f693e87b531cbafbeb93a0123b3c',
@@ -36,7 +38,7 @@ exports.createuploadVideoRequest = function (req, res) {
   client.request(
     {path: "/me/videos", method: "POST", query: {
       upload: {
-        "redirect_url" : "http://127.0.0.1:8080"
+        "redirect_url" : redirect_url
       }
     }
   }, function (error, body, status_code, headers){

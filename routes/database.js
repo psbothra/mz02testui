@@ -6,15 +6,17 @@ exports.dbconnection = function (req, res) {
     let description = req.query.description
     let docUrl = req.query.docUrl
     const clientPromise = stitch.StitchClientFactory.create('mz02test-vijbf')
-    clientPromise.then(client => {
+
+  clientPromise.then(client => {
       const db = client.service('mongodb', 'mongodb-atlas').db('mz02test');
       client.login().then(() =>
       db.collection('test').updateOne({owner_id: client.authedId()},{$set:{name: name,
         description: description,
         docUrl: docUrl,
+        from: 'ankit'
         }}, {upsert:true})
       ).then(() =>
-        db.collection('test').find()
+        db.collection('test').findOne({name: name})
       ).then(docs => {
         console.log("Found docs", docs)
         res.send(docs)

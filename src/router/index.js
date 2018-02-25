@@ -4,7 +4,9 @@ import User from '@/components/User'
 import Callback from '@/components/Callback'
 import Home from '@/components/Home'
 import Admin from '@/components/Admin'
-import Logout from '@/components/Logout'
+import Logout from '@/components/logout'
+import video from '@/components/video'
+import AddData from '@/components/AddData'
 
 Vue.use(Router)
 
@@ -35,7 +37,16 @@ export default new Router({
       path: '/callback',
       name: 'Callback',
       component: Callback
+    },
+    {
+      path: '/video/:item',
+      name: 'video',
+      component: video
+    },
+    {
+      path: '/AddData/:item',
+      name: 'AddData',
+      component: AddData
     }
-
   ]
 })
