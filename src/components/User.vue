@@ -53,7 +53,7 @@ export default {
       ]),
 
       calllogin () {
-        axios.get(`https://mz02testui.herokuapp.com/login`)
+        axios.get(`http://127.0.0.1:5000/login`)
           .then(response => {
             console.log(response)
           })
@@ -62,7 +62,7 @@ export default {
           })
       },
       calllogout () {
-        axios.get(`https://mz02testui.herokuapp.com/logout`)
+        axios.get(`http://127.0.0.1:5000/logout`)
           .then(response => {
             console.log(response.data)
           })
