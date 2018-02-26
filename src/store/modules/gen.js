@@ -1,16 +1,19 @@
 import router from '../../router'
 import axios from 'axios'
+import {ServerUrl} from '../../variables/config'
 
 const state = {
   btnLoader: false,
   firebaseApp: {},
   storage: {},
   coursedata: {},
+  loader: false,
   f1: false
 }
 
 const getters = {
   btnLoader: state => state.btnLoader,
+  loader: state => state.loader,
   coursedata: state => state.coursedata
 }
 
@@ -35,7 +38,9 @@ const mutations = {
 
                 actions.uploaddoc(state, docBind).then((result3) => {
                   if (result3) {
-                    axios.get('https://mz02test.herokuapp.com/connection', {
+                    let url = ServerUrl.url
+                    let DeployUrl = url + 'connection'
+                    axios.get(DeployUrl, {
                       params: {
                         name: payload.name,
                         description: payload.description,
@@ -76,12 +81,16 @@ const mutations = {
   },
 
   insertdata (state, payload) {
+    state.loader = true
     console.log(payload)
     let url = payload.videoUrl.slice(8)
     let dummyUrl = 'https://player.vimeo.com/video/video_id?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0'
     let videoUrl = dummyUrl.replace('video_id', url)
+    let url1 = ServerUrl.url
+    console.log(url1)
+    let DeployUrl = url1 + 'uploadvideoUrl'
 
-    axios.get('https://mz02test.herokuapp.com/uploadvideoUrl', {
+    axios.get(DeployUrl, {
       params: {
         name: payload.name,
         videoUrl: videoUrl
@@ -91,25 +100,17 @@ const mutations = {
         console.log(response)
         state.coursedata[response.data._id] = {
           name: response.data.name,
-          desc: response.data.description,
-          docUrl: response.data.docUrl,
           videoUrl: response.data.videoUrl
         }
         console.log(state.coursedata)
 
-        state.f1 = true
-        setTimeout(function () {
-          state.f1 = false
-        }, 1000)
         state.btnLoader = false
+        state.loader = false
       })
       .catch(function (error) {
         console.log(error)
-        state.f1 = true
-        setTimeout(function () {
-          state.f1 = false
-        }, 1000)
         state.btnLoader = false
+        state.loader = false
       })
   }
 }

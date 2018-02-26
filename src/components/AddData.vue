@@ -1,9 +1,11 @@
 <template>
   <div>
 
+    <loader v-if="loader"></loader>
+    <div v-else>
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
-        <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" >
+        <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k">
           <div slot="header">
             <div>
               <v-layout>
@@ -22,17 +24,9 @@
           <v-card>
             <v-card-text class="grey lighten-3">
               <v-layout>
-                <v-flex>
-                  <div class="pa-5">{{slide.desc}}</div>
-                </v-flex>
-                <v-flex>
-                  <a :href='slide.docUrl' target="_blank">Click to view document</a>
-                </v-flex>
-                <v-flex>
                   <iframe :src='slide.videoUrl'
                   width="400" height="300" frameborder="0" title="Untitled" webkitallowfullscreen mozallowfullscreen allowfullscreen>
                   </iframe>
-                </v-flex>
               </v-layout>
             </v-card-text>
           </v-card>
@@ -40,6 +34,7 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-layout >
+  </div>
 
   </div>
 </template>
@@ -47,6 +42,7 @@
 <script>
   import {mapMutations, mapGetters} from 'vuex'
   import btnLoader from '@/components/gen/btnLoader'
+  import loader from '@/components/gen/loader'
 
 export default {
     props: ['auth', 'authenticated'],
@@ -59,12 +55,14 @@ export default {
       ])
     },
     components: {
-      btnLoader
+      btnLoader,
+      loader
     },
     computed: {
       ...mapGetters([
         'btnLoader',
         'patchUpdateDom',
+        'loader',
         'coursedata'
       ])
     },

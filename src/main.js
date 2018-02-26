@@ -15,7 +15,7 @@ import './assets/css/style.css'
 import {store} from './store'
 
 // firebase
-import {config} from './firebase/config'
+import {FirebaseConfig} from './variables/config'
 const firebase = require('firebase')
 
 Vue.config.productionTip = false
@@ -29,7 +29,7 @@ new Vue({
   template: '<App/>',
   components: { App },
   created () {
-    this.$store.state.gen.firebaseApp = firebase.initializeApp(config)
+    this.$store.state.gen.firebaseApp = firebase.initializeApp(FirebaseConfig)
     this.$store.state.gen.storage = firebase.storage()
   }
 })

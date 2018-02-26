@@ -23,6 +23,7 @@
 <script>
   import axios from 'axios'
   import {mapMutations, mapGetters} from 'vuex'
+  import {ServerUrl} from '../variables/config'
 
 export default {
     name: 'hello',
@@ -37,7 +38,9 @@ export default {
       ...mapMutations([
       ]),
       callupload () {
-        axios.get(`https://mz02test.herokuapp.com/uploadvideo`, {
+        let url = ServerUrl.url
+        let deployUrl = url + 'uploadvideo'
+        axios.get(deployUrl, {
           params: {
             url: this.$route.params.item
           }

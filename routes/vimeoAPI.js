@@ -1,4 +1,6 @@
 var Vimeo = require('vimeo').Vimeo
+var serverUrl = require('../src/variables/config')
+
 
 exports.uploadedvideos = function (req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,16 +24,19 @@ exports.createuploadVideoRequest = function (req, res) {
 
   var headers = { 'Authorization': '5716aab30da741f33ae51c95d044f354', 'Content-Type': 'application/json'}
   let url = req.query.url
-  let redirect_url = 'https://mz02test.herokuapp.com/AddData/' + url
+  let url1 = serverUrl.ServerUrl.url
+  console.log(url1)
+  let deployUrl = url1 + 'AddData' + '/'
+  let redirect_url = deployUrl + url
 
   // set credentials
-/*  var client = new Vimeo('302b1711ccd9f693e87b531cbafbeb93a0123b3c',
+  var client = new Vimeo('302b1711ccd9f693e87b531cbafbeb93a0123b3c',
   'rLItS9Efp1vdlXDfBnQGSJ8zhXwvzQ/M2CeS8PG5HT6S8jI5IeFT0iX3HcyH5SuAqQDKwO0dPtEVBzTGV1N0b8e9HASknZ5/cgKdJccrP+84ELimXSYGj2Hkm02/J7at' ,
-  '5716aab30da741f33ae51c95d044f354');*/
+  '5716aab30da741f33ae51c95d044f354');
 
-  var client = new Vimeo('51154e93acc1fc74030ddd504f7150e344aa709f',
+  /* var client = new Vimeo('51154e93acc1fc74030ddd504f7150e344aa709f',
   '37KAZmfbT1JGzvsISOF3K/yk8GO9YH7/2Hy0lOZdwD5eVpLEC/5crkh5GOHbBDdX/LVlf14WMbTCY3t9WQv4MwI2uWwHGFb6Gl0LQXct/jhjSERtMJPI32tLWSf3b7jW' ,
-  'fe972adaf375470be9dcb58988ae0034');
+  'fe972adaf375470be9dcb58988ae0034'); */
 
 
   // call get method to see all uploaded videos

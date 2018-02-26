@@ -3,7 +3,7 @@
 
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
-        <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" >
+        <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k" >
           <div slot="header">
             <div>
               <v-layout>
