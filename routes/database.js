@@ -25,3 +25,25 @@ exports.dbconnection = function (req, res) {
       });
     });
     }
+
+    exports.uploadvideoUrl = function (req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        let name = req.query.name
+        let videoUrl = req.query.videoUrl
+        const clientPromise = stitch.StitchClientFactory.create('mz02test-vijbf')
+
+      clientPromise.then(client => {
+          const db = client.service('mongodb', 'mongodb-atlas').db('mz02test');
+          client.login().then(() =>
+          db.collection('test').updateOne({"name": name},{$set:{videoUrl: videoUrl
+            }}, {upsert:true})
+          ).then(() =>
+            db.collection('test').findOne({name: name})
+          ).then(docs => {
+            console.log("Found docs", docs)
+            res.send(docs)
+          }).catch(err => {
+            console.error(err)
+          });
+        });
+        }

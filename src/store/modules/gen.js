@@ -77,8 +77,41 @@ const mutations = {
 
   insertdata (state, payload) {
     console.log(payload)
-  }
+    let url = payload.videoUrl.slice(8)
+    let dummyUrl = 'https://player.vimeo.com/video/video_id?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0'
+    let videoUrl = dummyUrl.replace('video_id', url)
 
+    axios.get('https://mz02test.herokuapp.com/uploadvideoUrl', {
+      params: {
+        name: payload.name,
+        videoUrl: videoUrl
+      }
+    })
+      .then(function (response) {
+        console.log(response)
+        state.coursedata[response.data._id] = {
+          name: response.data.name,
+          desc: response.data.description,
+          docUrl: response.data.docUrl,
+          videoUrl: response.data.videoUrl
+        }
+        console.log(state.coursedata)
+
+        state.f1 = true
+        setTimeout(function () {
+          state.f1 = false
+        }, 1000)
+        state.btnLoader = false
+      })
+      .catch(function (error) {
+        console.log(error)
+        state.f1 = true
+        setTimeout(function () {
+          state.f1 = false
+        }, 1000)
+        state.btnLoader = false
+      })
+  }
 }
 
 const actions = {
