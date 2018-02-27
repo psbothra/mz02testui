@@ -7,6 +7,7 @@ const state = {
   firebaseApp: {},
   storage: {},
   coursedata: {},
+  patchUpdateDom: false,
   loader: false,
   f1: false
 }
@@ -14,6 +15,7 @@ const state = {
 const getters = {
   btnLoader: state => state.btnLoader,
   loader: state => state.loader,
+  patchUpdateDom: state => state.patchUpdateDom,
   coursedata: state => state.coursedata
 }
 
@@ -111,6 +113,34 @@ const mutations = {
         console.log(error)
         state.btnLoader = false
         state.loader = false
+      })
+  },
+
+  getdata (state) {
+    state.loader = true
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'getdata'
+    axios.get(deployUrl, { params: id: id})
+      .then(function (response) {
+        let dataLength = response.data.length
+        let i = 0
+        for (i in response.data) {
+          console.log(response.data[i])
+          state.coursedata[response.data[i]._id] = {
+            name: response.data[i].item
+          }
+        //  console.log(state.coursedata)
+        }
+        if (i === dataLength) {
+          console.log(i)
+          state.loader = false
+          state.patchUpdateDom = !state.patchUpdateDom
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+        state.loader = false
+        state.patchUpdateDom = !state.patchUpdateDom
       })
   }
 }

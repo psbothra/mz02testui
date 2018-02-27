@@ -1,13 +1,14 @@
-const stitch = require('mongodb-stitch')
+var MongoClient = require('mongodb').MongoClient;
+var uri = "mongodb://mz02test:kI7bgRc05v4A3NuN@cluster0-shard-00-00-hbfug.mongodb.net:27017,cluster0-shard-00-01-hbfug.mongodb.net:27017,cluster0-shard-00-02-hbfug.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+
 
 exports.dbconnection = function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     let name = req.query.name
     let description = req.query.description
     let docUrl = req.query.docUrl
-    const clientPromise = stitch.StitchClientFactory.create('mz02test-vijbf')
 
-  clientPromise.then(client => {
+  /*clientPromise.then(client => {
       const db = client.service('mongodb', 'mongodb-atlas').db('mz02test');
       client.login().then(() =>
       db.collection('test').updateOne({owner_id: client.authedId()},{$set:{name: name,
@@ -23,7 +24,7 @@ exports.dbconnection = function (req, res) {
       }).catch(err => {
         console.error(err)
       });
-    });
+    }); */
     }
 
     exports.uploadvideoUrl = function (req, res) {
@@ -31,9 +32,8 @@ exports.dbconnection = function (req, res) {
         let name = req.query.name
         let videoUrl = req.query.videoUrl
         console.log(videoUrl)
-        const clientPromise = stitch.StitchClientFactory.create('mz02test-vijbf')
 
-      clientPromise.then(client => {
+      /*clientPromise.then(client => {
           const db = client.service('mongodb', 'mongodb-atlas').db('mz02test');
           client.login().then(() =>
           db.collection('test').updateOne({owner_id: client.authedId()},{$set:{name: name,
@@ -47,5 +47,17 @@ exports.dbconnection = function (req, res) {
           }).catch(err => {
             console.error(err)
           });
-        });
+        });*/
+        }
+
+        exports.getdata = function (req, res) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          let x 
+          MongoClient.connect(uri, function(err, client) {
+            client.db('mz02test').collection('testing').find({Type: 'Training'}).toArray().then(docs => {
+              console.log(docs)
+              client.close();
+              res.send(docs)
+            });
+          });
         }

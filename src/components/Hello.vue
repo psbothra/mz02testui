@@ -97,7 +97,7 @@ export default {
       ...mapMutations([
       ]),
       uploaddoc (event) {
-        console.log(event.target.files[0].mozFullPath)
+        console.log(event.target.files[0])
         this.docObj = event.target.files[0]
         this.docUrl = URL.createObjectURL(event.target.files[0])
       },

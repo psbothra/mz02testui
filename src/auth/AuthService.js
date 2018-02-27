@@ -2,6 +2,7 @@ import auth0 from 'auth0-js'
 import { AUTH_CONFIG } from '../variables/config'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
+import jwtdecode from 'jwt-decode'
 
 export default class AuthService {
   authenticated = this.isAuthenticated()

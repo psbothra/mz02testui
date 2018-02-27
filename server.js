@@ -23,6 +23,9 @@ var dblocation = require('./routes/database')
   //upload videoUrl to database
   app.get('/uploadvideoUrl', dblocation.uploadvideoUrl)
 
+  //retrieve data from database
+  app.get('/getdata', dblocation.getdata)
+
   // call upload document
 //  app.get('/uploaddoc', doclocation.uploaddocument)
 

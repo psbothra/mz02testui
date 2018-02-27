@@ -1,6 +1,8 @@
 <template>
   <div>
 
+    <loader v-if="loader"></loader>
+    <div v-else>
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
         <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k" >
@@ -87,15 +89,15 @@
     style="background-color:#35495E">
        <v-icon>add</v-icon>
      </v-btn>
-
-     <div style="visibility: hidden"> {{update_f1}}</div>
-
+     </div>
+     <div style="visibility: hidden"> {{update_f1}} {{patchUpdateDom}}</div>
   </div>
 </template>
 
 <script>
   import {mapMutations, mapGetters} from 'vuex'
   import btnLoader from '@/components/gen/btnLoader'
+  import loader from '@/components/gen/loader'
 
 export default {
     props: ['auth', 'authenticated'],
@@ -121,12 +123,14 @@ export default {
       }
     },
     components: {
-      btnLoader
+      btnLoader,
+      loader
     },
     computed: {
       ...mapGetters([
         'btnLoader',
         'patchUpdateDom',
+        'loader',
         'coursedata'
       ]),
       update_f1 () {
@@ -145,6 +149,9 @@ export default {
           this.dialog = false
         }
       }
+    },
+    created () {
+      this.$store.commit('getdata')
     }
 }
 </script>

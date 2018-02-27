@@ -54,6 +54,7 @@ export default {
       getname () {
         const idToken = localStorage.getItem('id_token')
         const decoded = jwtdecode(idToken)
+        console.log(decoded.nickname)
         return decoded.nickname
       },
       getemailid () {

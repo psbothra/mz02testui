@@ -18,7 +18,7 @@
     "express": "^4.16.2",
     "firebase": "^4.10.1",
     "jwt-decode": "^2.2.0",
-    "mongodb-stitch": "^3.0.2",
+    "mongodb": "^3.0.3",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vimeo": "^2.0.0",
