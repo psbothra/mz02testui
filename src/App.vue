@@ -2,12 +2,7 @@
   <div id="app">
     <header>
       <div align="right">
-      <button
-          class="btn btn-primary btn-margin"
-          v-if="!authenticated"
-          @click="admin()">
-            Admin
-        </button>
+
 
       <button
           class="btn btn-primary btn-margin"

@@ -120,7 +120,7 @@ const mutations = {
     state.loader = true
     let url1 = ServerUrl.url
     let deployUrl = url1 + 'getdata'
-    axios.get(deployUrl, { params: id: id})
+    axios.get(deployUrl, { })
       .then(function (response) {
         let dataLength = response.data.length
         let i = 0

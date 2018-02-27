@@ -1,7 +1,10 @@
 <template>
-  <div class="spinner">
-    <h1>You have successfully logged out</h1>
+  <div id="app">
+    <h1 align = 'center'>
+      Successfully logged out
+    </h1>
   </div>
+
 </template>
 
 <script>

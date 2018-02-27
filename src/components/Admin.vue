@@ -1,50 +1,24 @@
 <template>
   <div>
 
-    <loader v-if="loader"></loader>
-    <div v-else>
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
         <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k" >
           <div slot="header">
-            <div>
-              <v-layout>
-                <v-flex>
-                  <v-card-title primary-title>
-                    <div>
-                      <h3 class="headline mb-0">{{slide.name}}</h3>
-                    </div>
-                  </v-card-title>
-                </v-flex>
-              </v-layout>
-              <v-divider></v-divider>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn @click="goTo('/video/' + slide.name)" fab small flat>
-                  <v-icon>edit</v-icon>
-                </v-btn>
-              </v-card-actions>
-            </div>
+            <h4 v-if="authenticated">
+              Hello Admin
+              <h4> Hi {{getname ()}} </h4>
+              <h4> {{getemailid ()}} </h4>
+          </h4>
+
           </div>
 
-          <v-card>
-            <v-card-text class="grey lighten-3">
-              <v-layout>
-                <v-flex>
-                  <div class="pa-5">{{slide.desc}}</div>
-                </v-flex>
-                <v-flex>
-                  <a :href='slide.docUrl' target="_blank">Click to view document</a>
-                </v-flex>
-              </v-layout>
-            </v-card-text>
-          </v-card>
 
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-layout >
 
-    <v-dialog v-model="dialog" maxWidth="400">
+
       <v-card class="pa-4" >
         <v-text-field
           label="Name of course"
@@ -83,21 +57,17 @@
         </v-card-actions>
 
       </v-card>
-    </v-dialog>
 
-    <v-btn @click="dialog=true" class="fixed-floating-button white--text" fab absolute fixed
-    style="background-color:#35495E">
-       <v-icon>add</v-icon>
-     </v-btn>
-     </div>
-     <div style="visibility: hidden"> {{update_f1}} {{patchUpdateDom}}</div>
+
+     <div style="visibility: hidden"> {{update_f1}}</div>
+
   </div>
 </template>
 
 <script>
   import {mapMutations, mapGetters} from 'vuex'
   import btnLoader from '@/components/gen/btnLoader'
-  import loader from '@/components/gen/loader'
+  import jwtdecode from 'jwt-decode'
 
 export default {
     props: ['auth', 'authenticated'],
@@ -120,17 +90,26 @@ export default {
       uploaddoc (event) {
         this.docObj = event.target.files[0]
         this.docUrl = URL.createObjectURL(event.target.files[0])
+      },
+      getname () {
+        const idToken = localStorage.getItem('id_token')
+        const decoded = jwtdecode(idToken)
+        return decoded.nickname
+      },
+      getemailid () {
+        const idToken = localStorage.getItem('id_token')
+        const decoded = jwtdecode(idToken)
+        console.log(decoded['http://mz02testis_admin'])
+        return decoded.email
       }
     },
     components: {
-      btnLoader,
-      loader
+      btnLoader
     },
     computed: {
       ...mapGetters([
         'btnLoader',
         'patchUpdateDom',
-        'loader',
         'coursedata'
       ]),
       update_f1 () {
@@ -149,9 +128,6 @@ export default {
           this.dialog = false
         }
       }
-    },
-    created () {
-      this.$store.commit('getdata')
     }
 }
 </script>

@@ -1,5 +1,5 @@
 import auth0 from 'auth0-js'
-import { AUTH_CONFIG } from '../variables/config'
+import { AUTH_CONFIG } from './auth0-variables'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
 import jwtdecode from 'jwt-decode'
@@ -21,7 +21,7 @@ export default class AuthService {
     redirectUri: AUTH_CONFIG.callbackUrl,
     audience: `https://${AUTH_CONFIG.domain}/userinfo`,
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid profile email'
   })
 
   login () {
@@ -32,7 +32,12 @@ export default class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
-        router.replace('User')
+        const decoded = jwtdecode(authResult.idToken)
+        if (decoded['http://mz02testis_admin']) {
+          router.replace('Admin')
+        } else {
+          router.replace('User')
+        }
       } else if (err) {
         router.replace('User')
         console.log(err)
