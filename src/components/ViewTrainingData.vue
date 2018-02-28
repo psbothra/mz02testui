@@ -113,7 +113,7 @@
       </v-card>
     </v-dialog>
 
-   <div style="visibility: hidden"> {{update_f1}}</div>
+   <div style="visibility: hidden"> {{update_f1}} {{update_f2}} {{update_f3}} {{update_f4}}</div>
 
   </div>
 </template>
@@ -137,6 +137,9 @@ export default {
         docUrl: '',
         videoUrl: '',
         f1: false,
+        f2: false,
+        f3: false,
+        f4: false,
         key: '',
         value: 'https://player.vimeo.com/video/257497540?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0'
       }
@@ -187,6 +190,18 @@ export default {
       update_f1 () {
         this.f1 = this.$store.state.gen.f1
         return this.f1
+      },
+      update_f2 () {
+        this.f2 = this.$store.state.gen.f1
+        return this.f2
+      },
+      update_f3 () {
+        this.f3 = this.$store.state.gen.f1
+        return this.f3
+      },
+      update_f4 () {
+        this.f4 = this.$store.state.gen.f1
+        return this.f4
       }
     },
     watch: {
@@ -194,6 +209,25 @@ export default {
         if (this.f1) {
           this.name = ''
           this.d1 = false
+        }
+      },
+      f2: function () {
+        if (this.f2) {
+          this.desc = ''
+          this.d2 = false
+        }
+      },
+      f3: function () {
+        if (this.f3) {
+          this.docUrl = ''
+          this.docObj = ''
+          this.d3 = false
+        }
+      },
+      f4: function () {
+        if (this.f4) {
+          this.videoUrl = ''
+          this.d4 = false
         }
       }
     },

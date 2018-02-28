@@ -47,6 +47,7 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-layout>
+       <div style="visibility: hidden"> {{patchUpdateDom}}</div>
 </div>
 </template>
 
