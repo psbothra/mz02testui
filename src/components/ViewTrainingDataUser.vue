@@ -5,39 +5,42 @@
     <h2 align="center">
     Course Detail
   </h2>
+  <br>
     <loader v-if="loader"></loader>
     <div v-else align="center">
       <div align="center" class="border border-dark" v-for="(slide,k) in coursedata" :key="k">
-        <br>
-        <div style="font-weight:bold, font-size: 12px">
-            <v-card-title primary-title>
-              <h2>Name of the course:-        </h2>
-              <div>
-                <div class="headline mb-0">{{slide.name}}</div>
-              </div>
-            </v-card-title>
-        </div>
-        <br>
-        <div style="font-size: 12px">
-
-            <v-card-title primary-title>
-              <h2>Course Description:-          </h2>
-              <div>
-                <div class="headline mb-0">{{slide.desc}}</div>
-              </div>
-            </v-card-title>
-        </div>
-        <br>
-          <h2>Course material:-</h2>
-            <iframe :src=slide.docUrl scrolling="no" style = "overflow: hidden; width:400px; height:300px">
-            </iframe>
-          <br>
-          <h2>Course video:-</h2>
-            <iframe :src=slide.vimeoId
+        <table style="width:95%; border: 1px solid black;
+        border-collapse: collapse">
+          <tr>
+            <th class="headline" style="border: 1px solid black;
+            border-collapse: collapse">Name of the course</th>
+            <th class="title" style="border: 1px solid black;
+            border-collapse: collapse">{{slide.name}}</th>
+          </tr>
+          <tr>
+            <th class="headline" style="border: 1px solid black;
+            border-collapse: collapse;">Course Description</th>
+            <th class="title" style="border: 1px solid black;
+            border-collapse: collapse">{{slide.desc}}</th>
+          </tr>
+          <tr>
+            <th class="headline" style="border: 1px solid black;
+            border-collapse: collapse">Course material</th>
+            <th class="title" style="border: 1px solid black;
+            border-collapse: collapse"><iframe :src=slide.docUrl scrolling="no" style = "overflow: hidden; width:400px; height:300px">
+            </iframe></th>
+          </tr>
+          <tr>
+            <th class="headline" style="border: 1px solid black;
+            border-collapse: collapse">Course video</th>
+            <th class="title" style="border: 1px solid black;
+            border-collapse: collapse"><iframe :src=slide.vimeoId
               width="400" height="300" frameborder="0" title="Untitled" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-            </iframe>
+            </iframe></th>
+          </tr>
+        </table>
       </div>
-  </div>
+    </div>
 
  </div>
  <div v-else>
