@@ -1,9 +1,6 @@
 <template>
   <div>
     <div v-if="authenticated">
-    <v-btn flat @click="$route.push(-1)">
-      Back
-    </v-btn>
     <v-card class="pa-4" flat>
       <v-text-field
           label="Name of course"

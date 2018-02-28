@@ -18,7 +18,7 @@ var dblocation = require('./routes/database')
   app.get('/getvideo', vimeolocation.uploadedvideos)
 
   // upload documentUrl to database
-  app.get('/connection', dblocation.dbconnection)
+  app.get('/uploaddata', dblocation.uploaddata)
 
   //upload videoUrl to database
   app.get('/uploadvideoUrl', dblocation.uploadvideoUrl)
@@ -26,8 +26,23 @@ var dblocation = require('./routes/database')
   //retrieve data from database
   app.get('/getdata', dblocation.getdata)
 
-  // call upload document
-//  app.get('/uploaddoc', doclocation.uploaddocument)
+  //retrieve tarining data from database
+  app.get('/gettrainingdata', dblocation.gettrainingdata)
+
+  //update course_name in database
+  app.get('/updatename', dblocation.updatename)
+
+  //update course_desc in database
+  app.get('/updatedesc', dblocation.updatedesc)
+
+  //update course_docUrl in database
+  app.get('/updatedocUrl', dblocation.updatedocUrl)
+
+  //update course_videoUrl in database
+  app.get('/updatevideoUrl', dblocation.updatevideoUrl)
+
+  //delete course_data from database
+  app.get('/deletedata', dblocation.deletedata)
 
 app.listen(port);
 console.log('server started '+ port);

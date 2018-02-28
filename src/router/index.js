@@ -9,6 +9,7 @@ import video from '@/components/video'
 import ViewTrainingData from '@/components/ViewTrainingData'
 import AddData from '@/components/AddData'
 import Unauth from '@/components/Unauth'
+import ViewTrainingDataUser from '@/components/ViewTrainingDataUser'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/ViewTrainingDataUser/:item',
+      name: 'ViewTrainingDataUser',
+      component: ViewTrainingDataUser
     },
     {
       path: '/home',

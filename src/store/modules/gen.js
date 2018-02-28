@@ -25,64 +25,71 @@ const mutations = {
   },
 
   uploaddata (state, payload) {
-    actions.checkEmptyField(payload.name).then((result) => {
-      if (result) {
-        actions.checkEmptyField(payload.description).then((result1) => {
-          if (result1) {
-            actions.checkEmptyField(payload.docUrl).then((result2) => {
-              if (result2) {
-                state.btnLoader = true
+      actions.checkEmptyField(payload.name).then((result) => {
+        if (result) {
+          actions.checkEmptyField(payload.description).then((result1) => {
+            if (result1) {
+              actions.checkEmptyField(payload.docUrl).then((result2) => {
+                if (result2) {
+                  actions.checkEmptyField(payload.vimeoId).then((result4) => {
+                    if (result2) {
+                      actions.checkEmptyField(payload.courseFee).then((result5) => {
+                        if (result2) {
+                  state.btnLoader = true
 
-                let docBind = {
-                  x: payload.docObj,
-                  y: payload.docUrl
-                }
-
-                actions.uploaddoc(state, docBind).then((result3) => {
-                  if (result3) {
-                    let url = ServerUrl.url
-                    let deployUrl = url + 'uploaddata'
-                    axios.get(deployUrl, {
-                      params: {
-                        name: payload.name,
-                        description: payload.description,
-                        docUrl: result3
-                      }
-                    })
-                      .then(function (response) {
-                        let dump = ''
-                        console.log(response)
-                        for (let i in response.data) {
-                          dump = response.data[i].Name
-                          state.coursedata[response.data[i]._id] = {
-                            name: response.data[i].Name
-                          }
-                          console.log(state.coursedata)
-                        }
-                        state.f1 = true
-                        setTimeout(function () {
-                          state.f1 = false
-                        }, 1000)
-                        state.btnLoader = false
-                        mutations.goTo(state, '/ViewTrainingData/' + dump)
-                      })
-                      .catch(function (error) {
-                        console.log(error)
-                        state.f1 = true
-                        setTimeout(function () {
-                          state.f1 = false
-                        }, 1000)
-                        state.btnLoader = false
-                      })
+                  let docBind = {
+                    x: payload.docObj,
+                    y: payload.docUrl
                   }
-                })
-              }
-            })
-          }
-        })
-      }
-    })
-  },
+
+                  actions.uploaddoc(state, docBind).then((result3) => {
+                    if (result3) {
+                      let url = ServerUrl.url
+                      let deployUrl = url + 'uploaddata'
+                      axios.get(deployUrl, {
+                        params: {
+                          name: payload.name,
+                          description: payload.description,
+                          docUrl: result3,
+                          vimeoId: payload.vimeoId,
+                          courseFee: payload.courseFee
+                        }
+                      })
+                        .then(function (response) {
+                          let dump = ''
+                          for (let i in response.data) {
+                            dump = response.data[i].Name
+                            state.coursedata[response.data[i]._id] = {
+                              name: response.data[i].Name
+                            }
+                          }
+                          state.f1 = true
+                          setTimeout(function () {
+                            state.f1 = false
+                          }, 1000)
+                          state.btnLoader = false
+                          mutations.goTo(state, '/ViewTrainingData/' + dump)
+                        })
+                        .catch(function (error) {
+                          state.f1 = true
+                          setTimeout(function () {
+                            state.f1 = false
+                          }, 1000)
+                          state.btnLoader = false
+                        })
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  })
+  }
+  })
+    },
 
   insertdata (state, payload) {
     state.loader = true
@@ -147,11 +154,10 @@ const mutations = {
           console.log(error)
           state.loader = false
           state.patchUpdateDom = !state.patchUpdateDom
-        })
+      })
   },
 
   gettrainingdata (state, payload) {
-
     console.log(payload)
     state.coursedata = {}
     state.loader = true

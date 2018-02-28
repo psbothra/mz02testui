@@ -10,7 +10,6 @@
     name: 'callback',
     props: ['auth'],
     data () {
-      console.log('hi')
       this.auth.handleAuthentication()
       return {}
     }
