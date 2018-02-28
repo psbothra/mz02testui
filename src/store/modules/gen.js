@@ -120,6 +120,7 @@ const mutations = {
 
   getdata (state) {
     state.loader = true
+    state.coursedata = {}
     let url1 = ServerUrl.url
     let deployUrl = url1 + 'getdata'
     axios.get(deployUrl)
@@ -173,6 +174,181 @@ const mutations = {
       .catch(function (error) {
         console.log(error)
         state.loader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+  },
+  updatename (state, payload) {
+    state.coursedata = {}
+    console.log(payload)
+    state.btnLoader = true
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'updatename'
+    axios.get(deployUrl, {
+      params: {
+        name: payload.name,
+        key: payload.key
+      }
+    })
+      .then(function (response) {
+        console.log(response.data)
+        state.coursedata[response.data._id] = {
+          name: response.data.Name,
+          desc: response.data.Desc,
+          docUrl: response.data.Docurl
+        }
+        state.f1 = true
+        setTimeout(function () {
+          state.f1 = false
+        }, 1000)
+        state.btnLoader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+      .catch(function (error) {
+        console.log(error)
+        state.f1 = true
+        setTimeout(function () {
+          state.f1 = false
+        }, 1000)
+        state.btnLoader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+  },
+
+  updatedesc (state, payload) {
+    state.coursedata = {}
+    console.log(payload)
+    state.btnLoader = true
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'updatedesc'
+    axios.get(deployUrl, {
+      params: {
+        desc: payload.desc,
+        key: payload.key
+      }
+    })
+      .then(function (response) {
+        console.log(response.data)
+        state.coursedata[response.data._id] = {
+          name: response.data.Name,
+          desc: response.data.Desc,
+          docUrl: response.data.Docurl
+        }
+        state.f1 = true
+        setTimeout(function () {
+          state.f1 = false
+        }, 1000)
+        state.btnLoader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+      .catch(function (error) {
+        console.log(error)
+        state.f1 = true
+        setTimeout(function () {
+          state.f1 = false
+        }, 1000)
+        state.btnLoader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+  },
+
+  updatedocUrl (state, payload) {
+    state.coursedata = {}
+    console.log(payload)
+    state.btnLoader = true
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'updatedocUrl'
+    let docBind = {
+      x: payload.docObj,
+      y: payload.docUrl
+    }
+
+    actions.uploaddoc(state, docBind).then((result) => {
+      if (result) {
+        axios.get(deployUrl, {
+          params: {
+            docUrl: result,
+            key: payload.key
+          }
+        })
+          .then(function (response) {
+            console.log(response.data)
+            state.coursedata[response.data._id] = {
+              name: response.data.Name,
+              desc: response.data.Desc,
+              docUrl: response.data.Docurl
+            }
+            state.f1 = true
+            setTimeout(function () {
+              state.f1 = false
+            }, 1000)
+            state.btnLoader = false
+            state.patchUpdateDom = !state.patchUpdateDom
+          })
+          .catch(function (error) {
+            console.log(error)
+            state.f1 = true
+            setTimeout(function () {
+              state.f1 = false
+            }, 1000)
+            state.btnLoader = false
+            state.patchUpdateDom = !state.patchUpdateDom
+          })
+      }
+    })
+  },
+
+  updatevideoUrl (state, payload) {
+    state.coursedata = {}
+    console.log(payload)
+    state.btnLoader = true
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'updatevideoUrl'
+    axios.get(deployUrl, {
+      params: {
+        videoUrl: payload.videoUrl,
+        key: payload.key
+      }
+    })
+      .then(function (response) {
+        console.log(response.data)
+        state.coursedata[response.data._id] = {
+          name: response.data.Name,
+          desc: response.data.Desc,
+          docUrl: response.data.Docurl
+        }
+        state.f1 = true
+        setTimeout(function () {
+          state.f1 = false
+        }, 1000)
+        state.btnLoader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+      .catch(function (error) {
+        console.log(error)
+        state.f1 = true
+        setTimeout(function () {
+          state.f1 = false
+        }, 1000)
+        state.btnLoader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+  },
+  deldata (state, payload) {
+    console.log(payload)
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'deletedata'
+    axios.get(deployUrl, {
+      params: {
+        name: payload.name
+      }
+    })
+      .then(function (response) {
+        console.log(response.data)
+        delete state.coursedata[payload.key]
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+      .catch(function (error) {
+        console.log(error)
         state.patchUpdateDom = !state.patchUpdateDom
       })
   }

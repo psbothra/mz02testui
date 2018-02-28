@@ -5,7 +5,7 @@
     <div align="center">
       <br>
       To add new training course click the button
-    <v-btn @click="goTo('/AddData')" class="fixed-floating-button white--text" fab absolute
+    <v-btn @click="goTo('/AddData')" class="fixed-floating-button white--text" fab absolute small
     style="background-color:#35495E">
        <v-icon>add</v-icon>
      </v-btn>
@@ -25,6 +25,23 @@
                 </v-card-title>
               </v-flex>
             </v-layout>
+            <v-divider></v-divider>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn flat fab small @click="dialog=true, name=slide.name, key=k" color="red">
+                  <v-icon>delete</v-icon></v-btn>
+                <v-dialog v-model="dialog" persistent max-width="290">
+                  <v-card>
+                    <v-card-title class="headline">Are you sure you want to delete?</v-card-title>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="green darken-1" flat @click.native="deldata({name: name, key: key}),
+                      dialog=false">Yes</v-btn>
+                      <v-btn color="green darken-1" flat @click.native="dialog = false">No</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-card-actions>
           </div>
         </div>
       </v-expansion-panel-content>
@@ -42,11 +59,15 @@ export default {
     props: ['auth', 'authenticated'],
     data () {
       return {
+        dialog: false,
+        name: '',
+        key: ''
       }
     },
     methods: {
       ...mapMutations([
-        'goTo'
+        'goTo',
+        'deldata'
       ])
     },
     components: {

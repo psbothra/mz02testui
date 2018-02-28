@@ -68,3 +68,83 @@ exports.uploaddata = function (req, res) {
             });
           });
         }
+
+        exports.updatename = function (req, res) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          let name = req.query.name
+          let key = req.query.key
+          console.log(key + name)
+          MongoClient.connect(uri, function(err, client) {
+            client.db('mz02test').collection('testing').updateOne(
+              { "Name" : key},
+              { $set: {Name: name}}).then(docs => {
+              client.db('mz02test').collection('testing').findOne({Name: name}).then(doc =>{
+                client.close();
+                res.send(doc)
+              });
+            });
+          });
+        }
+
+        exports.updatedesc = function (req, res) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          let desc = req.query.desc
+          let key = req.query.key
+          console.log(key)
+          MongoClient.connect(uri, function(err, client) {
+            client.db('mz02test').collection('testing').updateOne(
+              { "Name" : key},
+              { $set: {Desc: desc}}).then(docs => {
+              client.db('mz02test').collection('testing').findOne({Name: key}).then(doc =>{
+                client.close();
+                res.send(doc)
+              });
+            });
+          });
+        }
+
+        exports.updatedocUrl = function (req, res) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          let docUrl = req.query.docUrl
+          let key = req.query.key
+          console.log(key)
+          MongoClient.connect(uri, function(err, client) {
+            client.db('mz02test').collection('testing').updateOne(
+              { "Name" : key},
+              { $set: {Docurl: docUrl}}).then(docs => {
+              client.db('mz02test').collection('testing').findOne({Name: key}).then(doc =>{
+                client.close();
+                res.send(doc)
+              });
+            });
+          });
+        }
+
+        exports.updatevideoUrl = function (req, res) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          let videoUrl = req.query.videoUrl
+          let key = req.query.key
+          console.log(key)
+          MongoClient.connect(uri, function(err, client) {
+            client.db('mz02test').collection('testing').updateOne(
+              { "Name" : key},
+              { $set: {Vimeoid: videoUrl}}).then(docs => {
+              client.db('mz02test').collection('testing').findOne({Name: key}).then(doc =>{
+                client.close();
+                res.send(doc)
+              });
+            });
+          });
+        }
+
+        exports.deletedata = function (req, res) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          let name = req.query.name
+          console.log(name)
+          MongoClient.connect(uri, function(err, client) {
+            client.db('mz02test').collection('testing').deleteOne({Name: name}).then(docs => {
+              console.log(docs)
+              res.send('Data deleted')
+            });
+          });
+        }
