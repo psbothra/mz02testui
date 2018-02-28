@@ -1,40 +1,64 @@
 <template>
   <div>
+    <div v-if="authenticated">
+    <v-btn flat @click="$route.push(-1)">
+      Back
+    </v-btn>
+    <v-card class="pa-4" flat>
+      <v-text-field
+          label="Name of course"
+          v-model="course_name">
+        </v-text-field>
 
-    <loader v-if="loader"></loader>
-    <div v-else>
-    <v-layout>
-      <v-expansion-panel class="expansion-panel-remove-shadow" inset>
-        <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k">
-          <div slot="header">
-            <div>
-              <v-layout>
-                <v-flex>
-                  <v-card-title primary-title>
-                    <div>
-                      <h3 class="headline mb-0">{{slide.name}}</h3>
-                    </div>
-                  </v-card-title>
-                </v-flex>
-              </v-layout>
-              <v-divider></v-divider>
-            </div>
-          </div>
+        <v-text-field
+          label="Short Description"
+          v-model="course_description"
+          multi-line>
+        </v-text-field>
 
-          <v-card>
-            <v-card-text class="grey lighten-3">
-              <v-layout>
-                  <iframe :src='slide.videoUrl'
-                  width="400" height="300" frameborder="0" title="Untitled" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-                  </iframe>
-              </v-layout>
-            </v-card-text>
-          </v-card>
+        <v-card v-show=" docUrl != '' " class="text-xs-center" flat>
+          <a :href= 'docUrl' target="_blank">Click here to view document </a>
+        </v-card>
 
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-layout >
-  </div>
+        <v-card-actions>
+          <label id="#bb1" style="margin-left: 17px;">
+            <v-icon class="white--text">
+              file_upload
+            </v-icon>
+            <input type="file" name="doc" accept="*"  @change="uploaddoc($event)" id="uploaddoc">
+          </label>
+          <span class="caption">Upload Document</span>
+        </v-card-actions>
+
+        <v-text-field
+          label="Vimeo ID"
+          v-model="vimeoId">
+        </v-text-field>
+
+        <v-text-field
+            label="Course Fee"
+            v-model="courseFee">
+          </v-text-field>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+            <btnLoader v-if="btnLoader"></btnLoader>
+            <v-btn v-else flat @click="uploaddata({name: course_name,
+              description: course_description,
+              docObj: docObj,
+              docUrl: docUrl,
+              vimeoId: vimeoId,
+              courseFee: courseFee})">
+              Add
+            </v-btn>
+        </v-card-actions>
+
+      </v-card>
+     <div style="visibility: hidden"> {{update_f1}} {{patchUpdateDom}}</div>
+   </div>
+   <div v-else>
+     Unauthorised Access
+   </div>
 
   </div>
 </template>
@@ -42,34 +66,58 @@
 <script>
   import {mapMutations, mapGetters} from 'vuex'
   import btnLoader from '@/components/gen/btnLoader'
-  import loader from '@/components/gen/loader'
 
 export default {
     props: ['auth', 'authenticated'],
     data () {
       return {
+        docObj: '',
+        docUrl: '',
+        dialog: false,
+        course_name: '',
+        course_description: '',
+        vimeoId: '',
+        courseFee: '',
+        f1: false
       }
     },
     methods: {
       ...mapMutations([
-      ])
+        'uploaddata',
+        'goTo'
+      ]),
+      uploaddoc (event) {
+        this.docObj = event.target.files[0]
+        this.docUrl = URL.createObjectURL(event.target.files[0])
+      }
     },
     components: {
-      btnLoader,
-      loader
+      btnLoader
     },
     computed: {
       ...mapGetters([
         'btnLoader',
         'patchUpdateDom',
-        'loader',
         'coursedata'
-      ])
+      ]),
+      update_f1 () {
+        this.f1 = this.$store.state.gen.f1
+        return this.f1
+      }
     },
     watch: {
-    },
-    created () {
-      this.$store.commit('insertdata', {name: this.$route.params.item, videoUrl: this.$route.query.video_uri})
+      f1: function () {
+        if (this.f1) {
+          this.course_name = ''
+          this.course_description = ''
+          this.docObj = ''
+          this.docUrl = ''
+          document.getElementById('uploaddoc').value = ''
+          this.vimeoId = ''
+          this.courseFee = ''
+          this.dialog = false
+        }
+      }
     }
 }
 </script>

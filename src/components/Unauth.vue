@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-      <h2 align="center">You have successfully logged out</h2>
+      <h2 align="center">Unauthorized</h2>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'logout',
+    name: 'Unauth',
     data () {
       return {}
     }

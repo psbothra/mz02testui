@@ -6,7 +6,9 @@ import Home from '@/components/Home'
 import Admin from '@/components/Admin'
 import Logout from '@/components/logout'
 import video from '@/components/video'
+import ViewTrainingData from '@/components/ViewTrainingData'
 import AddData from '@/components/AddData'
+import Unauth from '@/components/Unauth'
 
 Vue.use(Router)
 
@@ -17,6 +19,16 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/Unauth',
+      name: 'Unauth',
+      component: Unauth
     },
     {
       path: '/admin',
@@ -44,7 +56,12 @@ export default new Router({
       component: video
     },
     {
-      path: '/AddData/:item',
+      path: '/ViewTrainingData/:item',
+      name: 'ViewTrainingData',
+      component: ViewTrainingData
+    },
+    {
+      path: '/AddData',
       name: 'AddData',
       component: AddData
     }

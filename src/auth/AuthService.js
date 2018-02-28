@@ -1,5 +1,5 @@
 import auth0 from 'auth0-js'
-import { AUTH_CONFIG } from './auth0-variables'
+import { AUTH_CONFIG } from '../variables/config'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
 import jwtdecode from 'jwt-decode'
@@ -34,14 +34,14 @@ export default class AuthService {
         this.setSession(authResult)
         const decoded = jwtdecode(authResult.idToken)
         if (decoded['http://mz02testis_admin']) {
-          router.replace('Admin')
+          router.push('Admin')
         } else {
-          router.replace('User')
+          router.push('User')
         }
       } else if (err) {
-        router.replace('User')
-        console.log(err)
-        alert(`Error: ${err.error}. Check the console for further details.`)
+        router.push('User')
+        console.log(authResult)
+        // alert(`Error: ${err.error}. Check the console for further details.`)
       }
     })
   }
@@ -55,6 +55,12 @@ export default class AuthService {
     localStorage.setItem('id_token', authResult.idToken)
     localStorage.setItem('expires_at', expiresAt)
     this.authNotifier.emit('authChange', { authenticated: true })
+    const decodedIsadmin = jwtdecode(authResult.idToken)
+    if (decodedIsadmin['http://mz02testis_admin']) {
+      localStorage.setItem('isadmin', true)
+    } else {
+      localStorage.setItem('isadmin', false)
+    }
   }
 
   logout () {
@@ -65,7 +71,8 @@ export default class AuthService {
     this.userProfile = null
     this.authNotifier.emit('authChange', false)
     // navigate to the home route
-    router.replace('logout')
+    // router.push(path)
+    router.push('/logout')
   }
 
   isAuthenticated () {

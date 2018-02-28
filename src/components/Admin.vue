@@ -1,133 +1,102 @@
 <template>
   <div>
-
-    <v-layout>
-      <v-expansion-panel class="expansion-panel-remove-shadow" inset>
-        <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k" >
-          <div slot="header">
-            <h4 v-if="authenticated">
-              Hello Admin
-              <h4> Hi {{getname ()}} </h4>
-              <h4> {{getemailid ()}} </h4>
-          </h4>
-
-          </div>
-
-
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-layout >
-
-
-      <v-card class="pa-4" >
-        <v-text-field
-          label="Name of course"
-          v-model="course_name">
-        </v-text-field>
-
-        <v-text-field
-          label="Short Description"
-          v-model="course_description"
-          multi-line>
-        </v-text-field>
-
-        <v-card v-show=" docUrl != '' " class="text-xs-center" flat>
-          <a :href= 'docUrl' target="_blank">Click here to view document </a>
-        </v-card>
-
-        <v-card-actions>
-          <label id="#bb1" style="margin-left: 17px;">
-            <v-icon class="white--text">
-              file_upload
-            </v-icon>
-            <input type="file" name="doc" accept="*"  @change="uploaddoc($event)" id="uploaddoc">
-          </label>
-          <span class="caption">Upload Document</span>
-        </v-card-actions>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-            <btnLoader v-if="btnLoader"></btnLoader>
-            <v-btn v-else flat @click="uploaddata({name: course_name,
-              description: course_description,
-              docObj: docObj,
-              docUrl: docUrl})">
-              Add
-            </v-btn>
-        </v-card-actions>
-
-      </v-card>
-
-
-     <div style="visibility: hidden"> {{update_f1}}</div>
-
+    <div v-if="authenticated">
+    <loader v-if="loader"></loader>
+    <div v-else>
+    <div align="center">
+      <br>
+      <h3>To add new training course click the button below
+      <v-btn flat @click="goTo('/AddData')" style="background-color:#294069">
+        Add Course
+      </v-btn>
+    </h3>
+      <br>
+      <h2 align="center">
+      Available Courses
+    </h2>
+   </div>
   </div>
+  <v-layout>
+    <v-expansion-panel class="expansion-panel-remove-shadow" inset>
+      <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k" >
+        <div slot="header">
+          <div>
+            <v-layout>
+              <v-flex>
+                <v-card-title primary-title>
+                  <div>
+                    <div @click="goTo('/ViewTrainingData/' + slide.name)" class="headline mb-0">{{slide.name}}</div>
+                  </div>
+                </v-card-title>
+              </v-flex>
+            </v-layout>
+            <v-divider></v-divider>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn flat fab small @click="dialog=true, name=slide.name, key=k" color="red">
+                  <v-icon>delete</v-icon></v-btn>
+                <v-dialog v-model="dialog" persistent max-width="290">
+                  <v-card>
+                    <v-card-title class="headline">Are you sure you want to delete the course?</v-card-title>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="green darken-1" flat @click.native="deldata({name: name, key: key}),
+                      dialog=false">Yes</v-btn>
+                      <v-btn color="green darken-1" flat @click.native="dialog = false">No</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-card-actions>
+          </div>
+        </div>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+  </v-layout>
+</div>
+<div v-else>
+  Unauthorised Access
+</div>
+</div>
 </template>
 
 <script>
   import {mapMutations, mapGetters} from 'vuex'
   import btnLoader from '@/components/gen/btnLoader'
-  import jwtdecode from 'jwt-decode'
+  import loader from '@/components/gen/loader'
 
 export default {
     props: ['auth', 'authenticated'],
     data () {
       return {
-        db_connect: '',
-        docObj: '',
-        docUrl: '',
         dialog: false,
-        course_name: '',
-        course_description: '',
-        f1: false
+        name: '',
+        key: '',
+        is_admin: false
       }
     },
     methods: {
       ...mapMutations([
-        'uploaddata',
-        'goTo'
-      ]),
-      uploaddoc (event) {
-        this.docObj = event.target.files[0]
-        this.docUrl = URL.createObjectURL(event.target.files[0])
-      },
-      getname () {
-        const idToken = localStorage.getItem('id_token')
-        const decoded = jwtdecode(idToken)
-        return decoded.nickname
-      },
-      getemailid () {
-        const idToken = localStorage.getItem('id_token')
-        const decoded = jwtdecode(idToken)
-        console.log(decoded['http://mz02testis_admin'])
-        return decoded.email
-      }
+        'goTo',
+        'deldata',
+      ])
     },
     components: {
-      btnLoader
+      btnLoader,
+      loader
     },
     computed: {
       ...mapGetters([
         'btnLoader',
         'patchUpdateDom',
+        'loader',
         'coursedata'
-      ]),
-      update_f1 () {
-        this.f1 = this.$store.state.gen.f1
-        return this.f1
-      }
+      ])
     },
     watch: {
-      f1: function () {
-        if (this.f1) {
-          this.course_name = ''
-          this.course_description = ''
-          this.docObj = ''
-          this.docUrl = ''
-          document.getElementById('uploaddoc').value = ''
-          this.dialog = false
-        }
-      }
+    },
+    created () {
+      this.$store.commit('getdata')
+      // this.$store.commit('getisadmin', this.$route.params.name)
     }
 }
 </script>
