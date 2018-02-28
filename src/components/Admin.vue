@@ -20,29 +20,15 @@
               <v-divider></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="goTo('/video/' + slide.name)" fab small flat>
+                <v-btn @click="goTo('/ViewTrainingData/' + slide.name)" fab small flat>
                   <v-icon>edit</v-icon>
                 </v-btn>
               </v-card-actions>
             </div>
           </div>
-
-          <v-card>
-            <v-card-text class="grey lighten-3">
-              <v-layout>
-                <v-flex>
-                  <div class="pa-5">{{slide.desc}}</div>
-                </v-flex>
-                <v-flex>
-                  <a :href='slide.docUrl' target="_blank">Click to view document</a>
-                </v-flex>
-              </v-layout>
-            </v-card-text>
-          </v-card>
-
         </v-expansion-panel-content>
       </v-expansion-panel>
-    </v-layout >
+    </v-layout>
 
     <v-dialog v-model="dialog" maxWidth="400">
       <v-card class="pa-4" >
@@ -103,7 +89,6 @@ export default {
     props: ['auth', 'authenticated'],
     data () {
       return {
-        db_connect: '',
         docObj: '',
         docUrl: '',
         dialog: false,

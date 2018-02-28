@@ -41,8 +41,8 @@ const mutations = {
                 actions.uploaddoc(state, docBind).then((result3) => {
                   if (result3) {
                     let url = ServerUrl.url
-                    let DeployUrl = url + 'connection'
-                    axios.get(DeployUrl, {
+                    let deployUrl = url + 'uploaddata'
+                    axios.get(deployUrl, {
                       params: {
                         name: payload.name,
                         description: payload.description,
@@ -51,13 +51,12 @@ const mutations = {
                     })
                       .then(function (response) {
                         console.log(response)
-                        state.coursedata[response.data._id] = {
-                          name: response.data.name,
-                          desc: response.data.description,
-                          docUrl: response.data.docUrl
+                        for (let i in response.data) {
+                          state.coursedata[response.data[i]._id] = {
+                            name: response.data[i].Name
+                          }
+                          console.log(state.coursedata)
                         }
-                        console.log(state.coursedata)
-
                         state.f1 = true
                         setTimeout(function () {
                           state.f1 = false
@@ -120,22 +119,53 @@ const mutations = {
     state.loader = true
     let url1 = ServerUrl.url
     let deployUrl = url1 + 'getdata'
-    axios.get(deployUrl, { params: id: id})
+    axios.get(deployUrl)
       .then(function (response) {
         let dataLength = response.data.length
+        console.log(dataLength)
         let i = 0
+        let flag = 0
         for (i in response.data) {
           console.log(response.data[i])
           state.coursedata[response.data[i]._id] = {
-            name: response.data[i].item
+            name: response.data[i].Name
+          }
+          flag++
+          console.log(i)
+          if (flag === dataLength) {
+            console.log(i)
+            state.loader = false
+            state.patchUpdateDom = !state.patchUpdateDom
           }
         //  console.log(state.coursedata)
         }
-        if (i === dataLength) {
-          console.log(i)
-          state.loader = false
-          state.patchUpdateDom = !state.patchUpdateDom
+      })
+      .catch(function (error) {
+        console.log(error)
+        state.loader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+      })
+  },
+  gettrainingdata (state, payload) {
+    console.log(payload)
+    state.coursedata = {}
+    state.loader = true
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'gettrainingdata'
+    axios.get(deployUrl, {
+      params: {
+        name: payload
+      }
+    })
+      .then(function (response) {
+        console.log(response.data)
+        state.coursedata[response.data._id] = {
+          name: response.data.Name,
+          desc: response.data.Desc,
+          docUrl: response.data.Docurl
         }
+        state.loader = false
+        state.patchUpdateDom = !state.patchUpdateDom
       })
       .catch(function (error) {
         console.log(error)

@@ -6,7 +6,7 @@ import Home from '@/components/Home'
 import Admin from '@/components/Admin'
 import Logout from '@/components/logout'
 import video from '@/components/video'
-import AddData from '@/components/AddData'
+import ViewTrainingData from '@/components/ViewTrainingData'
 
 Vue.use(Router)
 
@@ -44,9 +44,9 @@ export default new Router({
       component: video
     },
     {
-      path: '/AddData/:item',
-      name: 'AddData',
-      component: AddData
+      path: '/ViewTrainingData/:item',
+      name: 'ViewTrainingData',
+      component: ViewTrainingData
     }
   ]
 })

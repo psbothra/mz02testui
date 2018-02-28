@@ -1,19 +1,46 @@
 <template>
   <div>
-    <div align="right" class= "pb-5">
-      <h4 v-if="authenticated">
-        You are logged in!
-        <pre>
-         <h4> Hi {{getname ()}} </h4>
-         <h4> {{getemailid ()}} </h4>
-       </pre>
-    </h4>
-    <h4 v-if="!authenticated">
-      You are not logged in! Please <a @click="auth.login()">Log In</a> to continue.
-    </h4>
+    <loader v-if="loader"></loader>
+    <div v-else>
+      <div align="right" class= "pb-5">
+        <h4 v-if="authenticated">
+          You are logged in!
+          <pre>
+            <h4> Hi {{getname ()}} </h4>
+            <h4> {{getemailid ()}} </h4>
+          </pre>
+        </h4>
+        <h4 v-if="!authenticated">
+          You are not logged in! Please <a @click="auth.login()">Log In</a> to continue.
+        </h4>
+      </div>
+      <v-layout>
+        <v-expansion-panel class="expansion-panel-remove-shadow" inset>
+          <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k" >
+            <div slot="header">
+              <div>
+                <v-layout>
+                  <v-flex>
+                    <v-card-title primary-title>
+                      <div>
+                        <h3 class="headline mb-0">{{slide.name}}</h3>
+                      </div>
+                    </v-card-title>
+                  </v-flex>
+                </v-layout>
+                <v-divider></v-divider>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn @click="goTo('/ViewTrainingData/' + slide.name)" fab small flat>
+                    <v-icon>edit</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </div>
+            </div>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-layout>
   </div>
-
-
   </div>
 </template>
 
@@ -21,6 +48,7 @@
   import axios from 'axios'
   import {mapMutations, mapGetters} from 'vuex'
   import jwtdecode from 'jwt-decode'
+  import loader from '@/components/gen/loader'
 
 export default {
     name: 'user',
@@ -31,6 +59,7 @@ export default {
     },
     methods: {
       ...mapMutations([
+        'goTo'
       ]),
 
       calllogin () {
@@ -65,15 +94,19 @@ export default {
       }
     },
     components: {
-
+      loader
     },
     computed: {
       ...mapGetters([
-
+        'loader',
+        'coursedata'
       ])
     },
     watch: {
 
+    },
+    created () {
+      this.$store.commit('getdata')
     }
 }
 </script>

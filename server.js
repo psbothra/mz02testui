@@ -18,13 +18,16 @@ var dblocation = require('./routes/database')
   app.get('/getvideo', vimeolocation.uploadedvideos)
 
   // upload documentUrl to database
-  app.get('/connection', dblocation.dbconnection)
+  app.get('/uploaddata', dblocation.uploaddata)
 
   //upload videoUrl to database
   app.get('/uploadvideoUrl', dblocation.uploadvideoUrl)
 
   //retrieve data from database
   app.get('/getdata', dblocation.getdata)
+
+  //retrieve tarining data from database
+  app.get('/gettrainingdata', dblocation.gettrainingdata)
 
   // call upload document
 //  app.get('/uploaddoc', doclocation.uploaddocument)

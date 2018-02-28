@@ -1,5 +1,5 @@
 <template>
-  <div class="spinner">
+  <div id="app">
     <h1>You have successfully logged out</h1>
   </div>
 </template>
