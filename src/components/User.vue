@@ -23,18 +23,11 @@
                   <v-flex>
                     <v-card-title primary-title>
                       <div>
-                        <h3 class="headline mb-0">{{slide.name}}</h3>
+                        <div @click="goTo('/ViewTrainingData/' + slide.name)" class="headline mb-0">{{slide.name}}</div>
                       </div>
                     </v-card-title>
                   </v-flex>
                 </v-layout>
-                <v-divider></v-divider>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn @click="goTo('/ViewTrainingData/' + slide.name)" fab small flat>
-                    <v-icon>edit</v-icon>
-                  </v-btn>
-                </v-card-actions>
               </div>
             </div>
           </v-expansion-panel-content>

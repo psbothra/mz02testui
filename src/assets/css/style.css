@@ -10,9 +10,6 @@ body {
 }
 
 .fixed-floating-button {
-  position: fixed;
-  bottom: 85px;
-  right: 23px;
 }
 
 header {

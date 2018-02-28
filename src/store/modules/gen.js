@@ -50,8 +50,10 @@ const mutations = {
                       }
                     })
                       .then(function (response) {
+                        let dump = ''
                         console.log(response)
                         for (let i in response.data) {
+                          dump = response.data[i].Name
                           state.coursedata[response.data[i]._id] = {
                             name: response.data[i].Name
                           }
@@ -62,6 +64,7 @@ const mutations = {
                           state.f1 = false
                         }, 1000)
                         state.btnLoader = false
+                        mutations.goTo(state, '/ViewTrainingData/' + dump)
                       })
                       .catch(function (error) {
                         console.log(error)

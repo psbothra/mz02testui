@@ -40,8 +40,8 @@ export default class AuthService {
         }
       } else if (err) {
         router.replace('User')
-        console.log(err)
-        alert(`Error: ${err.error}. Check the console for further details.`)
+        console.log(authResult)
+        // alert(`Error: ${err.error}. Check the console for further details.`)
       }
     })
   }

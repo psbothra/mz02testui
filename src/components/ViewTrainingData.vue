@@ -29,7 +29,7 @@ export default {
     props: ['auth', 'authenticated'],
     data () {
       return {
-        value: 'https://player.vimeo.com/video/255934170?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0'
+        value: 'https://player.vimeo.com/video/257497540?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0'
       }
     },
     methods: {
