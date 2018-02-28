@@ -56,7 +56,6 @@
    <div v-else>
      Unauthorised Access
    </div>
-
   </div>
 </template>
 

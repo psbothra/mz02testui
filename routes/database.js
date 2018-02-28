@@ -126,13 +126,13 @@ exports.uploaddata = function (req, res) {
 
         exports.updatevideoUrl = function (req, res) {
           res.setHeader('Access-Control-Allow-Origin', '*');
-          let videoUrl = req.query.videoUrl
+          let vimeoId = req.query.vimeoId
           let key = req.query.key
           console.log(key)
           MongoClient.connect(uri, function(err, client) {
             client.db('mz02test').collection('testing').updateOne(
               { "Name" : key},
-              { $set: {Vimeoid: videoUrl}}).then(docs => {
+              { $set: {Vimeoid: 'https://player.vimeo.com/video/' + vimeoId + '?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0'}}).then(docs => {
               client.db('mz02test').collection('testing').findOne({Name: key}).then(doc =>{
                 client.close();
                 res.send(doc)

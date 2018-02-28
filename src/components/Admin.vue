@@ -36,8 +36,8 @@
                 <v-btn flat fab small @click="dialog=true, name=slide.name, key=k" color="red">
                   <v-icon>delete</v-icon></v-btn>
                 <v-dialog v-model="dialog" persistent max-width="290">
-                  <v-card>
-                    <v-card-title class="headline">Are you sure you want to delete the course?</v-card-title>
+                  <v-card style="background-color: #f0f0f0">
+                    <v-card-title class="headline">Are you sure you want to delete?</v-card-title>
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn color="green darken-1" flat @click.native="deldata({name: name, key: key}),
@@ -52,10 +52,11 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-layout>
-</div>
-<div v-else>
-  Unauthorised Access
-</div>
+  </div>
+  <div v-else>
+    Unauthorised Access
+  </div>
+     <div style="visibility: hidden">{{patchUpdateDom}}</div>
 </div>
 </template>
 
@@ -77,7 +78,7 @@ export default {
     methods: {
       ...mapMutations([
         'goTo',
-        'deldata',
+        'deldata'
       ])
     },
     components: {
