@@ -5,68 +5,57 @@
     <h2 align="center">
     Course Detail
   </h2>
+  <br>
     <loader v-if="loader"></loader>
     <div v-else align="center">
       <div align="center" class="border border-dark" v-for="(slide,k) in coursedata" :key="k">
-        <br>
-        <div style="font-weight:bold, font-size: 12px">
-          <v-layout row wrap align-center justify-center>
-          <v-flex xs6>
-            <v-card-title primary-title>
-              <h2>Name of the course:-        </h2>
-              <div>
-                <div class="headline mb-0">{{slide.name}}</div>
-              </div>
-            </v-card-title>
-          </v-flex>
-          <v-flex xs6>
-            <v-btn flat @click="callupdatename(slide.name)" style="background-color:#35495E">
+        <table style="width:95%; border: 1px solid black;
+        border-collapse: collapse">
+          <tr>
+            <th class="headline" style="border: 1px solid black;
+            border-collapse: collapse;">Name of the course</th>
+            <th class="title" style="border: 1px solid black;
+            border-collapse: collapse">{{slide.name}}</th>
+            <th style="border: 1px solid black;
+            border-collapse: collapse"><v-btn flat @click="callupdatename(slide.name)" style="background-color:#35495E">
              <v-icon>edit</v-icon>
-           </v-btn>
-         </v-flex>
-       </v-layout>
-        </div>
-        <br>
-        <div style="font-size: 12px">
-          <v-layout row wrap align-center justify-center>
-          <v-flex xs6>
-            <v-card-title primary-title>
-              <h2>Course Description:-          </h2>
-              <div>
-                <div class="headline mb-0">{{slide.desc}}</div>
-              </div>
-            </v-card-title>
-          </v-flex>
-          <v-flex xs6>
-            <v-btn flat @click="callupdatedesc(slide.name, slide.desc)" style="background-color:#35495E">
+           </v-btn></th>
+          </tr>
+          <tr>
+            <th class="headline" style="border: 1px solid black;
+            border-collapse: collapse">Course Description</th>
+            <th class="title" style="border: 1px solid black;
+            border-collapse: collapse">{{slide.desc}}</th>
+            <th style="border: 1px solid black;
+            border-collapse: collapse"><v-btn flat @click="callupdatedesc(slide.name, slide.desc)" style="background-color:#35495E">
              <v-icon>edit</v-icon>
-           </v-btn>
-          </v-flex>
-          </v-layout>
-        </div>
-        <br>
-        <v-layout row wrap justify-center>
-          <h2>Course material:-         </h2>
-          <v-flex xs6>
-            <iframe :src=slide.docUrl scrolling="no" style = "overflow: hidden; width:400px; height:300px">
-            </iframe>
-            <v-btn flat @click="callupdatedocUrl(slide.name, slide.docurl)" style="background-color:#35495E">
+           </v-btn></th>
+          </tr>
+          <tr>
+            <th class="headline" style="border: 1px solid black;
+            border-collapse: collapse">Course material</th>
+            <th class="title" style="border: 1px solid black;
+            border-collapse: collapse"><iframe :src=slide.docUrl scrolling="no" style = "overflow: hidden; width:400px; height:300px">
+            </iframe></th>
+            <th style="border: 1px solid black;
+            border-collapse: collapse"><v-btn flat @click="callupdatedocUrl(slide.name, slide.docurl)" style="background-color:#35495E">
                <v-icon>edit</v-icon>
-            </v-btn>
-          </v-flex>
-          <br>
-          <h2>Course video:-          </h2>
-          <v-flex xs6>
-            <iframe :src=slide.vimeoId
+            </v-btn></th>
+          </tr>
+          <tr>
+            <th class="headline" style="border: 1px solid black;
+            border-collapse: collapse">Course video</th>
+            <th class="title" style="border: 1px solid black;
+            border-collapse: collapse"><iframe :src=slide.vimeoId
               width="400" height="300" frameborder="0" title="Untitled" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-            </iframe>
-            <v-btn flat @click="callupdatevideoUrl(slide.name, slide.vimeoId)" style="background-color:#35495E">
+            </iframe></th>
+            <th style="border: 1px solid black;
+            border-collapse: collapse"><v-btn flat @click="callupdatevideoUrl(slide.name, slide.vimeoId)" style="background-color:#35495E">
                <v-icon>edit</v-icon>
-             </v-btn>
-          </v-flex>
-        </v-layout>
+             </v-btn></th>
+          </tr>
+        </table>
       </div>
-  </div>
 
     <v-dialog v-model="d1" maxWidth="600">
       <v-card class="pa-4" style="background-color: #F0F0F0">
