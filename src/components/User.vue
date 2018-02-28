@@ -38,7 +38,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import {mapMutations, mapGetters} from 'vuex'
   import jwtdecode from 'jwt-decode'
   import loader from '@/components/gen/loader'
@@ -54,25 +53,6 @@ export default {
       ...mapMutations([
         'goTo'
       ]),
-
-      calllogin () {
-        axios.get(`http://127.0.0.1:5000/login`)
-          .then(response => {
-            console.log(response)
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      },
-      calllogout () {
-        axios.get(`http://127.0.0.1:5000/logout`)
-          .then(response => {
-            console.log(response.data)
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      },
       getname () {
         const idToken = localStorage.getItem('id_token')
         const decoded = jwtdecode(idToken)
