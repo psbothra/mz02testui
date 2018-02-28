@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div v-if="authenticated">
     <v-card class="pa-4" flat>
       <v-text-field
           label="Name of course"
@@ -26,19 +27,35 @@
           <span class="caption">Upload Document</span>
         </v-card-actions>
 
+        <v-text-field
+          label="Vimeo ID"
+          v-model="vimeoId">
+        </v-text-field>
+
+        <v-text-field
+            label="Course Fee"
+            v-model="courseFee">
+          </v-text-field>
+
         <v-card-actions>
           <v-spacer></v-spacer>
             <btnLoader v-if="btnLoader"></btnLoader>
             <v-btn v-else flat @click="uploaddata({name: course_name,
               description: course_description,
               docObj: docObj,
-              docUrl: docUrl})">
+              docUrl: docUrl,
+              vimeoId: vimeoId,
+              courseFee: courseFee})">
               Add
             </v-btn>
         </v-card-actions>
 
       </v-card>
      <div style="visibility: hidden"> {{update_f1}} {{patchUpdateDom}}</div>
+   </div>
+   <div v-else>
+     Unauthorised Access
+   </div>
   </div>
 </template>
 
@@ -55,6 +72,8 @@ export default {
         dialog: false,
         course_name: '',
         course_description: '',
+        vimeoId: '',
+        courseFee: '',
         f1: false
       }
     },
@@ -90,6 +109,8 @@ export default {
           this.docObj = ''
           this.docUrl = ''
           document.getElementById('uploaddoc').value = ''
+          this.vimeoId = ''
+          this.courseFee = ''
           this.dialog = false
         }
       }

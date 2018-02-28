@@ -12,6 +12,21 @@ body {
 .fixed-floating-button {
 }
 
+.table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
 header {
   margin: 0;
   height: 56px;

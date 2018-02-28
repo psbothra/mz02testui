@@ -1,22 +1,26 @@
 <template>
   <div>
-
+    <div v-if="authenticated">
+    <br>
+    <h2 align="center">
+    Course Detail
+  </h2>
     <loader v-if="loader"></loader>
-    <div v-else>
-      <div align="center" v-for="(slide,k) in coursedata" :key="k">
+    <div v-else align="center">
+      <div align="center" class="border border-dark" v-for="(slide,k) in coursedata" :key="k">
         <br>
         <div style="font-weight:bold, font-size: 12px">
           <v-layout row wrap align-center justify-center>
           <v-flex xs6>
             <v-card-title primary-title>
+              <h2>Name of the course:-        </h2>
               <div>
                 <div class="headline mb-0">{{slide.name}}</div>
               </div>
             </v-card-title>
           </v-flex>
           <v-flex xs6>
-          <v-btn @click="callupdatename(slide.name)" class="fixed-floating-button white--text" fab absolute small
-          style="background-color:#35495E">
+            <v-btn flat @click="callupdatename(slide.name)" style="background-color:#35495E">
              <v-icon>edit</v-icon>
            </v-btn>
          </v-flex>
@@ -27,36 +31,36 @@
           <v-layout row wrap align-center justify-center>
           <v-flex xs6>
             <v-card-title primary-title>
+              <h2>Course Description:-          </h2>
               <div>
-                <div class="sub-heading mb-0">{{slide.desc}}</div>
+                <div class="headline mb-0">{{slide.desc}}</div>
               </div>
             </v-card-title>
           </v-flex>
           <v-flex xs6>
-          <v-btn @click="callupdatedesc(slide.name, slide.desc)" class="fixed-floating-button white--text" fab absolute small
-          style="background-color:#35495E">
+            <v-btn flat @click="callupdatedesc(slide.name, slide.desc)" style="background-color:#35495E">
              <v-icon>edit</v-icon>
            </v-btn>
           </v-flex>
           </v-layout>
         </div>
         <br>
-        <v-layout row wrap justify-center align-center>
+        <v-layout row wrap justify-center>
+          <h2>Course material:-         </h2>
           <v-flex xs6>
             <iframe :src=slide.docUrl scrolling="no" style = "overflow: hidden; width:400px; height:300px">
             </iframe>
-            <br>
-            <v-btn @click="callupdatedocUrl(slide.name, slide.docurl)" class="fixed-floating-button white--text" fab absolute small
-            style="background-color:#35495E">
+            <v-btn flat @click="callupdatedocUrl(slide.name, slide.docurl)" style="background-color:#35495E">
                <v-icon>edit</v-icon>
             </v-btn>
           </v-flex>
+          <br>
+          <h2>Course video:-          </h2>
           <v-flex xs6>
-            <iframe :src=value
+            <iframe :src=slide.vimeoId
               width="400" height="300" frameborder="0" title="Untitled" webkitallowfullscreen mozallowfullscreen allowfullscreen>
             </iframe>
-            <v-btn @click="callupdatevideoUrl(slide.name, slide.videoUrl)" class="fixed-floating-button white--text" fab absolute small
-            style="background-color:#35495E">
+            <v-btn flat @click="callupdatevideoUrl(slide.name, slide.vimeoId)" style="background-color:#35495E">
                <v-icon>edit</v-icon>
              </v-btn>
           </v-flex>
@@ -72,7 +76,7 @@
           </v-text-field>
         <btnLoader v-if="btnLoader"></btnLoader>
         <v-btn flat v-else @click="updatename({name: name, key: key})">
-          Update
+          Update Name
         </v-btn>
       </v-card>
     </v-dialog>
@@ -86,7 +90,7 @@
         </v-text-field>
         <btnLoader v-if="btnLoader"></btnLoader>
         <v-btn flat v-else @click="updatedesc({desc: desc, key: key})">
-          Update
+          Update Description
         </v-btn>
       </v-card>
     </v-dialog>
@@ -108,13 +112,29 @@
         </v-card-actions>
         <btnLoader v-if="btnLoader"></btnLoader>
         <v-btn flat v-else @click="updatedocUrl({docObj: docObj, docUrl: docUrl, key: key})">
-          Update
+          Update Document
+        </v-btn>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="d4" maxWidth="600">
+      <v-card class="pa-4" style="background-color: #F0F0F0">
+        <v-text-field
+          label="Vimeo ID"
+          v-model="vimeoId">
+        </v-text-field>
+        <btnLoader v-if="btnLoader"></btnLoader>
+        <v-btn flat v-else @click="updatevideoUrl({vimeoId: vimeoId, key: key})">
+          Update Vimeo Id
         </v-btn>
       </v-card>
     </v-dialog>
 
    <div style="visibility: hidden"> {{update_f1}} {{update_f2}} {{update_f3}} {{update_f4}}</div>
-
+ </div>
+ <div v-else>
+   Unauthorised Access
+ </div>
   </div>
 </template>
 
@@ -135,7 +155,7 @@ export default {
         desc: '',
         docObj: '',
         docUrl: '',
-        videoUrl: '',
+        vimeoId: '',
         f1: false,
         f2: false,
         f3: false,
@@ -171,7 +191,7 @@ export default {
         this.d3 = true
       },
       callupdatevideoUrl (x, y) {
-        this.videoUrl = y
+        this.vimeoId = y
         this.key = x
         this.d4 = true
       }
@@ -226,7 +246,7 @@ export default {
       },
       f4: function () {
         if (this.f4) {
-          this.videoUrl = ''
+          this.vimeoId = ''
           this.d4 = false
         }
       }

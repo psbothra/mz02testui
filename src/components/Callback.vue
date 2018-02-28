@@ -1,7 +1,7 @@
 <template>
-  <div class="spinner">
-    <h1>In call back page</h1>
-    
+  <div id="app">
+    <h2 align="center">Please wait while we set your session</h2>
+
   </div>
 </template>
 
@@ -10,7 +10,6 @@
     name: 'callback',
     props: ['auth'],
     data () {
-      console.log('hi')
       this.auth.handleAuthentication()
       return {}
     }

@@ -1,14 +1,19 @@
 <template>
   <div>
+    <div v-if="authenticated">
     <loader v-if="loader"></loader>
     <div v-else>
     <div align="center">
       <br>
-      To add new training course click the button
-    <v-btn @click="goTo('/AddData')" class="fixed-floating-button white--text" fab absolute small
-    style="background-color:#35495E">
-       <v-icon>add</v-icon>
-     </v-btn>
+      <h3>To add new training course click the button below
+      <v-btn flat @click="goTo('/AddData')" style="background-color:#294069">
+        Add Course
+      </v-btn>
+    </h3>
+      <br>
+      <h2 align="center">
+      Available Courses
+    </h2>
    </div>
   </div>
   <v-layout>
@@ -31,7 +36,7 @@
                 <v-btn flat fab small @click="dialog=true, name=slide.name, key=k" color="red">
                   <v-icon>delete</v-icon></v-btn>
                 <v-dialog v-model="dialog" persistent max-width="290">
-                  <v-card>
+                  <v-card style="background-color: #f0f0f0">
                     <v-card-title class="headline">Are you sure you want to delete?</v-card-title>
                     <v-card-actions>
                       <v-spacer></v-spacer>
@@ -47,7 +52,11 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-layout>
-       <div style="visibility: hidden"> {{patchUpdateDom}}</div>
+  </div>
+  <div v-else>
+    Unauthorised Access
+  </div>
+     <div style="visibility: hidden">{{patchUpdateDom}}</div>
 </div>
 </template>
 
@@ -62,7 +71,8 @@ export default {
       return {
         dialog: false,
         name: '',
-        key: ''
+        key: '',
+        is_admin: false
       }
     },
     methods: {
@@ -87,6 +97,7 @@ export default {
     },
     created () {
       this.$store.commit('getdata')
+      // this.$store.commit('getisadmin', this.$route.params.name)
     }
 }
 </script>

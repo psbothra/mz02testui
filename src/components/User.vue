@@ -1,17 +1,17 @@
 <template>
   <div>
+    <div v-if="authenticated">
     <loader v-if="loader"></loader>
     <div v-else>
       <div align="right" class= "pb-5">
         <h4 v-if="authenticated">
-          You are logged in!
           <pre>
             <h4> Hi {{getname ()}} </h4>
             <h4> {{getemailid ()}} </h4>
           </pre>
         </h4>
         <h4 v-if="!authenticated">
-          You are not logged in! Please <a @click="auth.login()">Log In</a> to continue.
+          You are not logged in! Please Log In to continue.
         </h4>
       </div>
       <v-layout>
@@ -23,7 +23,7 @@
                   <v-flex>
                     <v-card-title primary-title>
                       <div>
-                        <div @click="goTo('/ViewTrainingData/' + slide.name)" class="headline mb-0">{{slide.name}}</div>
+                        <div @click="goTo('/ViewTrainingDataUser/' + slide.name)" class="headline mb-0">{{slide.name}}</div>
                       </div>
                     </v-card-title>
                   </v-flex>
@@ -34,6 +34,10 @@
         </v-expansion-panel>
       </v-layout>
   </div>
+</div>
+<div v-else>
+  Unauthorised Access
+</div>
   </div>
 </template>
 
@@ -56,13 +60,11 @@ export default {
       getname () {
         const idToken = localStorage.getItem('id_token')
         const decoded = jwtdecode(idToken)
-        console.log(decoded.nickname)
         return decoded.nickname
       },
       getemailid () {
         const idToken = localStorage.getItem('id_token')
         const decoded = jwtdecode(idToken)
-        console.log(decoded)
         return decoded.email
       }
     },

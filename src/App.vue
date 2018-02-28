@@ -3,6 +3,12 @@
     <header>
       <div align="right">
 
+        <button
+            class="btn btn-primary btn-margin"
+            @click="Home()">
+              Home
+          </button>
+
       <button
           class="btn btn-primary btn-margin"
           v-if="!authenticated"
@@ -47,7 +53,10 @@ export default {
   },
   methods: {
     login,
-    logout
+    logout,
+    Home () {
+      this.$router.push('Home')
+    }
   }
 }
 </script>

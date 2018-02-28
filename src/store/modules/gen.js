@@ -31,49 +31,55 @@ const mutations = {
           if (result1) {
             actions.checkEmptyField(payload.docUrl).then((result2) => {
               if (result2) {
-                state.btnLoader = true
-
-                let docBind = {
-                  x: payload.docObj,
-                  y: payload.docUrl
-                }
-
-                actions.uploaddoc(state, docBind).then((result3) => {
+                actions.checkEmptyField(payload.vimeoId).then((result3) => {
                   if (result3) {
-                    let url = ServerUrl.url
-                    let deployUrl = url + 'uploaddata'
-                    axios.get(deployUrl, {
-                      params: {
-                        name: payload.name,
-                        description: payload.description,
-                        docUrl: result3
+                    actions.checkEmptyField(payload.courseFee).then((result4) => {
+                      if (result4) {
+                        state.btnLoader = true
+                        let docBind = {
+                          x: payload.docObj,
+                          y: payload.docUrl
+                        }
+                        actions.uploaddoc(state, docBind).then((result5) => {
+                          if (result5) {
+                            let url = ServerUrl.url
+                            let deployUrl = url + 'uploaddata'
+                            axios.get(deployUrl, {
+                              params: {
+                                name: payload.name,
+                                description: payload.description,
+                                docUrl: result5,
+                                vimeoId: payload.vimeoId,
+                                courseFee: payload.courseFee
+                              }
+                            })
+                              .then(function (response) {
+                                let dump = ''
+                                for (let i in response.data) {
+                                  dump = response.data[i].Name
+                                  state.coursedata[response.data[i]._id] = {
+                                    name: response.data[i].Name
+                                  }
+                                }
+                                state.f1 = true
+                                setTimeout(function () {
+                                  state.f1 = false
+                                }, 1000)
+                                state.btnLoader = false
+                                mutations.goTo(state, '/ViewTrainingData/' + dump)
+                              })
+                              .catch(function (error) {
+                                console.log(error)
+                                state.f1 = true
+                                setTimeout(function () {
+                                  state.f1 = false
+                                }, 1000)
+                                state.btnLoader = false
+                              })
+                          }
+                        })
                       }
                     })
-                      .then(function (response) {
-                        let dump = ''
-                        console.log(response)
-                        for (let i in response.data) {
-                          dump = response.data[i].Name
-                          state.coursedata[response.data[i]._id] = {
-                            name: response.data[i].Name
-                          }
-                          console.log(state.coursedata)
-                        }
-                        state.f1 = true
-                        setTimeout(function () {
-                          state.f1 = false
-                        }, 1000)
-                        state.btnLoader = false
-                        mutations.goTo(state, '/ViewTrainingData/' + dump)
-                      })
-                      .catch(function (error) {
-                        console.log(error)
-                        state.f1 = true
-                        setTimeout(function () {
-                          state.f1 = false
-                        }, 1000)
-                        state.btnLoader = false
-                      })
                   }
                 })
               }
@@ -117,7 +123,6 @@ const mutations = {
         state.loader = false
       })
   },
-
   getdata (state) {
     state.loader = true
     state.coursedata = {}
@@ -141,7 +146,7 @@ const mutations = {
             state.loader = false
             state.patchUpdateDom = !state.patchUpdateDom
           }
-        //  console.log(state.coursedata)
+          //  console.log(state.coursedata)
         }
       })
       .catch(function (error) {
@@ -150,6 +155,7 @@ const mutations = {
         state.patchUpdateDom = !state.patchUpdateDom
       })
   },
+
   gettrainingdata (state, payload) {
     console.log(payload)
     state.coursedata = {}
@@ -166,7 +172,8 @@ const mutations = {
         state.coursedata[response.data._id] = {
           name: response.data.Name,
           desc: response.data.Desc,
-          docUrl: response.data.Docurl
+          docUrl: response.data.Docurl,
+          vimeoId: response.data.Vimeoid
         }
         state.loader = false
         state.patchUpdateDom = !state.patchUpdateDom
@@ -231,7 +238,8 @@ const mutations = {
         state.coursedata[response.data._id] = {
           name: response.data.Name,
           desc: response.data.Desc,
-          docUrl: response.data.Docurl
+          docUrl: response.data.Docurl,
+          vimeoId: response.data.Vimeoid
         }
         state.f1 = true
         setTimeout(function () {
@@ -275,7 +283,8 @@ const mutations = {
             state.coursedata[response.data._id] = {
               name: response.data.Name,
               desc: response.data.Desc,
-              docUrl: response.data.Docurl
+              docUrl: response.data.Docurl,
+              vimeoId: response.data.Vimeoid
             }
             state.f1 = true
             setTimeout(function () {
@@ -305,7 +314,7 @@ const mutations = {
     let deployUrl = url1 + 'updatevideoUrl'
     axios.get(deployUrl, {
       params: {
-        videoUrl: payload.videoUrl,
+        vimeoId: payload.vimeoId,
         key: payload.key
       }
     })
@@ -314,7 +323,8 @@ const mutations = {
         state.coursedata[response.data._id] = {
           name: response.data.Name,
           desc: response.data.Desc,
-          docUrl: response.data.Docurl
+          docUrl: response.data.Docurl,
+          vimeoId: response.data.Vimeoid
         }
         state.f1 = true
         setTimeout(function () {

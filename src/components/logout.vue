@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>You have successfully logged out</h1>
+      <h2 align="center">You have successfully logged out</h2>
   </div>
 </template>
 
