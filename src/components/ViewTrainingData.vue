@@ -175,7 +175,7 @@ export default {
         this.d3 = true
       },
       callupdatevideoUrl (x, y) {
-        this.videoUrl = y
+        this.vimeoId = y
         this.key = x
         this.d4 = true
       }

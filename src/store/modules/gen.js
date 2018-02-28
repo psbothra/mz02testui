@@ -239,7 +239,8 @@ const mutations = {
         state.coursedata[response.data._id] = {
           name: response.data.Name,
           desc: response.data.Desc,
-          docUrl: response.data.Docurl
+          docUrl: response.data.Docurl,
+          vimeoId: response.data.Vimeoid
         }
         state.f1 = true
         setTimeout(function () {
@@ -283,7 +284,8 @@ const mutations = {
             state.coursedata[response.data._id] = {
               name: response.data.Name,
               desc: response.data.Desc,
-              docUrl: response.data.Docurl
+              docUrl: response.data.Docurl,
+              vimeoId: response.data.Vimeoid
             }
             state.f1 = true
             setTimeout(function () {
@@ -313,7 +315,7 @@ const mutations = {
     let deployUrl = url1 + 'updatevideoUrl'
     axios.get(deployUrl, {
       params: {
-        videoUrl: payload.videoUrl,
+        vimeoId: payload.vimeoId,
         key: payload.key
       }
     })
@@ -322,7 +324,8 @@ const mutations = {
         state.coursedata[response.data._id] = {
           name: response.data.Name,
           desc: response.data.Desc,
-          docUrl: response.data.Docurl
+          docUrl: response.data.Docurl,
+          vimeoId: response.data.Vimeoid
         }
         state.f1 = true
         setTimeout(function () {
