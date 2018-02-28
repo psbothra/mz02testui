@@ -4,7 +4,7 @@
     <loader v-if="loader"></loader>
     <div v-else>
       <div align="right" class= "pb-5">
-        <h4 v-if="authenticated">
+        <h4>
           <pre>
             <h4> Hi {{getname ()}} </h4>
             <h4> {{getemailid ()}} </h4>

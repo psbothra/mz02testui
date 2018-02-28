@@ -13,6 +13,16 @@
           multi-line>
         </v-text-field>
 
+        <v-text-field
+          label="Vimeo ID"
+          v-model="vimeoId">
+        </v-text-field>
+
+        <v-text-field
+            label="Course Fee"
+            v-model="courseFee">
+        </v-text-field>
+
         <v-card v-show=" docUrl != '' " class="text-xs-center" flat>
           <a :href= 'docUrl' target="_blank">Click here to view document </a>
         </v-card>
@@ -26,16 +36,6 @@
           </label>
           <span class="caption">Upload Document</span>
         </v-card-actions>
-
-        <v-text-field
-          label="Vimeo ID"
-          v-model="vimeoId">
-        </v-text-field>
-
-        <v-text-field
-            label="Course Fee"
-            v-model="courseFee">
-          </v-text-field>
 
         <v-card-actions>
           <v-spacer></v-spacer>
