@@ -137,7 +137,8 @@ const mutations = {
         for (i in response.data) {
           console.log(response.data[i])
           state.coursedata[response.data[i]._id] = {
-            name: response.data[i].Name
+            name: response.data[i].Name,
+            amount: response.data[i].courseFee
           }
           flag++
           console.log(i)

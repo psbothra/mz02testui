@@ -45,7 +45,7 @@ var paypallocation = require('./routes/paypal')
   //delete course_data from database
   app.get('/deletedata', dblocation.deletedata)
 
-  //
+  //paypal payment
   app.get('/paypalpayment', paypallocation.paypalpayment)
 
 app.listen(port);

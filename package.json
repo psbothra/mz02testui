@@ -20,6 +20,7 @@
     "jwt-decode": "^2.2.0",
     "mongodb": "^3.0.3",
     "paypal-rest-sdk": "^1.8.1",
+    "request": "^2.83.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vimeo": "^2.0.0",

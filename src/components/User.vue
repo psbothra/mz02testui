@@ -24,7 +24,7 @@
                     <v-card-title primary-title>
                       <div>
                         <div @click="goTo('/ViewTrainingDataUser/' + slide.name)" class="headline mb-0">{{slide.name}}</div>
-                        <v-btn flat @click="createpayment()">
+                        <v-btn flat @click="createpayment(slide.amount)">
                           Paypal
                         </v-btn>
                       </div>
@@ -49,7 +49,7 @@
   import jwtdecode from 'jwt-decode'
   import loader from '@/components/gen/loader'
   import axios from 'axios'
-  import {ServerUrl} from '../../variables/config'
+  import {ServerUrl} from '../variables/config'
 
 export default {
     name: 'user',
@@ -72,12 +72,17 @@ export default {
         const decoded = jwtdecode(idToken)
         return decoded.email
       },
-      createpayment () {
+      createpayment (x) {
         let url = ServerUrl.url
         let deployUrl = url + 'paypalpayment'
-        axios.get(deployUrl)
+        axios.get(deployUrl, {
+          params: {
+            amount: x
+          }
+        })
           .then(function (response) {
             console.log(response.data)
+            window.location.href = response.data
           })
           .catch(function (error) {
             console.log(error)
