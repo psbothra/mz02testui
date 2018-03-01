@@ -46,7 +46,7 @@ var paypallocation = require('./routes/paypal')
   app.get('/deletedata', dblocation.deletedata)
 
   //
-  app.get('/paypalpayment', dblocation.paypallocation)
+  app.get('/paypalpayment', paypallocation.paypalpayment)
 
 app.listen(port);
 console.log('server started '+ port);
