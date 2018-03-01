@@ -24,6 +24,9 @@
                     <v-card-title primary-title>
                       <div>
                         <div @click="goTo('/ViewTrainingDataUser/' + slide.name)" class="headline mb-0">{{slide.name}}</div>
+                        <v-btn flat @click="createpayment()">
+                          Paypal
+                        </v-btn>
                       </div>
                     </v-card-title>
                   </v-flex>
@@ -66,6 +69,17 @@ export default {
         const idToken = localStorage.getItem('id_token')
         const decoded = jwtdecode(idToken)
         return decoded.email
+      },
+      createpayment () {
+        let url = ServerUrl.url
+        let deployUrl = url + 'paypalpayment'
+        axios.get(deployUrl)
+          .then(function (response) {
+            console.log(response.data)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       }
     },
     components: {

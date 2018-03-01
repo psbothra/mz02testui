@@ -9,6 +9,7 @@ var port = process.env.PORT || 5000;
 
 var vimeolocation = require('./routes/vimeoAPI')
 var dblocation = require('./routes/database')
+var paypallocation = require('./routes/paypal')
 // var doclocation = require('./routes/firebasestorage')
 
   // create upload request to vimeo
@@ -43,6 +44,9 @@ var dblocation = require('./routes/database')
 
   //delete course_data from database
   app.get('/deletedata', dblocation.deletedata)
+
+  //
+  app.get('/paypalpayment', dblocation.paypallocation)
 
 app.listen(port);
 console.log('server started '+ port);
