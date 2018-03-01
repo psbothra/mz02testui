@@ -48,6 +48,8 @@
   import {mapMutations, mapGetters} from 'vuex'
   import jwtdecode from 'jwt-decode'
   import loader from '@/components/gen/loader'
+  import axios from 'axios'
+  import {ServerUrl} from '../../variables/config'
 
 export default {
     name: 'user',

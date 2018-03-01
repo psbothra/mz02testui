@@ -19,7 +19,7 @@ exports.ServerUrl = {
 }
 
 exports.PaypalConfig = {
-  mode: 'sandbox', //sandbox or live
+  mode: 'sandbox', // sandbox or live
   client_id: 'AcypMhGY-P62Oy3qyEGO_4d05-9bUJm3j1TD1KQffr8M2QoZW5HAetrtmpSUIerOoCMZJMnJL-I7JC0f',
   client_secret: 'EI1yfLc9KIfC2YQrNTbvnVE7dXr3qSLVaGrCOhARscZl2iVcYYFVJ5mP71EPMuOW3ZJG0WgZCkJ6eHb9'
 }
