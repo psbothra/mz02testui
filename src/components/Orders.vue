@@ -23,7 +23,9 @@
                   <v-flex>
                     <v-card-title primary-title>
                       <div>
-                        <div @click="goTo('/ViewTrainingDataUser/' + slide.name)" class="headline mb-0">{{slide.name}}
+                        <div class="headline mb-0">{{slide.paymentId}}
+                        <div class="mb-0">{{slide.name}}
+                        <div class="mb-0">{{slide.emailId}}
                         </div>
                       </div>
                     </v-card-title>

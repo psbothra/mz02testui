@@ -414,13 +414,28 @@ const mutations = {
       }).then(function (response) {
         console.log(response.data)
 
-        state.purchasedcourse[response.data._id] = {
-          name: response.data.Name
+        let dataLength = response.data.length
+        console.log(dataLength)
+        let i = 0
+        let flag = 0
+        for (i in response.data) {
+          console.log(response.data[i])
+          state.purchasedcourse[response.data[i]._id] = {
+            name: response.data[i].Name,
+            paymentId: response.data[i].PaymentId,
+            emailId: response.data[i].EmailId
+          }
+          flag++
+          console.log(i)
+          if (flag === dataLength) {
+            console.log(i)
+            state.loader = false
+            state.patchUpdateDom = !state.patchUpdateDom
+          }
         }
-        state.loader = false
-        state.patchUpdateDom = !state.patchUpdateDom
       }).catch(function (error) {
         console.log(error)
+        state.loader = false
         state.patchUpdateDom = !state.patchUpdateDom
       })
     }
