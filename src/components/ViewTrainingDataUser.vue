@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="authenticated">
+    <div v-if="authenticated && isAdmin == false">
     <br>
     <h2 align="center">
     Course Detail
@@ -89,7 +89,8 @@ export default {
         'btnLoader',
         'patchUpdateDom',
         'loader',
-        'coursedata'
+        'coursedata',
+        'isAdmin'
       ])
     },
     watch: {

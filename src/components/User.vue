@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="authenticated">
+    <div v-if="authenticated && isAdmin == false">
     <loader v-if="loader"></loader>
     <div v-else>
       <div align="right" class= "pb-5">
@@ -96,7 +96,8 @@ export default {
     computed: {
       ...mapGetters([
         'loader',
-        'coursedata'
+        'coursedata',
+        'isAdmin'
       ])
     },
     watch: {

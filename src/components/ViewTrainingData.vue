@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{isAdmin}}
     <div v-if="authenticated && isAdmin">
     <br>
     <h2 align="center">
