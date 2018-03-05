@@ -157,12 +157,13 @@ exports.uploaddata = function (req, res) {
           res.setHeader('Access-Control-Allow-Origin', '*');
           let name = req.query.name
           let emailId = req.query.emailId
-          let token = req.query.token
           let paymentId = req.query.paymentId
           let PayerID = req.query.PayerID
 
           MongoClient.connect(uri, function(err, client) {
-            client.db('mz02test').collection('testing').insertOne({Name: name}).then(docs => {
+            client.db('mz02test').collection('testing').insertOne({Name: name, EmailId: emailId, PaymentId: paymentId,
+              orders: [paymentId]})
+            .then(docs => {
               console.log(docs)
               res.send('Hello')
             });

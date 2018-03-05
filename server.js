@@ -54,5 +54,8 @@ var paypallocation = require('./routes/paypal')
   //paypal payment
   app.get('/paypalpayment', paypallocation.paypalpayment)
 
+  // retrieve paypal payment details
+  app.get('/getpaymentdetails', paypallocation.getpaymentdetails)
+
 app.listen(port);
 console.log('server started '+ port);

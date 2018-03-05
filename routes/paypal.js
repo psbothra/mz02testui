@@ -13,6 +13,7 @@ exports.paypalpayment = function(req, res) {
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
   let amount = req.query.amount
+  let name = req.query.name
   let approval_url = ''
   let payment_executeurl = ''
   let return_url = configVariables.ServerUrl.url + 'Orders'
@@ -28,7 +29,7 @@ exports.paypalpayment = function(req, res) {
     "transactions": [{
         "item_list": {
             "items": [{
-                "name": "item",
+                "name": name,
                 "sku": "item",
                 "price": amount,
                 "currency": "INR",
@@ -82,4 +83,23 @@ paypal.payment.create(create_payment_json, function (error, payment) {
     }
 });
 
+}
+
+exports.getpaymentdetails = function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+  let paymentId = req.query.paymentId
+
+  paypal.payment.get(paymentId, function (error, payment) {
+  if (error) {
+      console.log(error);
+      throw error;
+  } else {
+      console.log("Get Payment Response");
+      console.log(JSON.stringify(payment));
+      res.send(JSON.stringify(payment))
+  }
+
+  });
 }

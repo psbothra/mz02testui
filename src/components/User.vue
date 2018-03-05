@@ -24,7 +24,7 @@
                     <v-card-title primary-title>
                       <div>
                         <div @click="goTo('/ViewTrainingDataUser/' + slide.name)" class="headline mb-0">{{slide.name}}</div>
-                        <v-btn flat @click="createpayment(slide.amount)">
+                        <v-btn flat @click="createpayment(slide.amount, slide.name)">
                           Paypal
                         </v-btn>
                       </div>
@@ -72,12 +72,13 @@ export default {
         const decoded = jwtdecode(idToken)
         return decoded.email
       },
-      createpayment (x) {
+      createpayment (x, y) {
         let url = ServerUrl.url
         let deployUrl = url + 'paypalpayment'
         axios.get(deployUrl, {
           params: {
-            amount: x
+            amount: x,
+            name: y
           }
         })
           .then(function (response) {

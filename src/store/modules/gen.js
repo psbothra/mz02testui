@@ -404,35 +404,45 @@ const mutations = {
       let emailId = decoded.email
       let name = decoded.nickname
       console.log(emailId + '@@@' + name + '$$$$' + idToken)
-
-      let deployUrl = url + 'insertorders'
-      axios.get(deployUrl, {
+      let getname = url + 'getpaymentdetails'
+      axios.get(getname, {
         params: {
-          paymentId: paymentId,
-          token: token,
-          PayerID: PayerID,
-          emailId: emailId,
-          name: name
+          paymentId: paymentId
         }
       }).then(function (response) {
         console.log(response.data)
-        let dataLength = response.data.length
-        console.log(dataLength)
-        /* let i = 0
-        let flag = 0
-        for (i in response.data) {
-          console.log(response.data[i])
-          state.purchasedcourse[response.data[i]._id] = {
-            name: response.data[i].Name
+        let deployUrl = url + 'insertorders'
+        axios.get(deployUrl, {
+          params: {
+            paymentId: paymentId,
+            token: token,
+            PayerID: PayerID,
+            emailId: emailId,
+            name: name
           }
-          flag++
-          console.log(i)
-          if (flag === dataLength) {
+        }).then(function (response) {
+          console.log(response.data)
+          let dataLength = response.data.length
+          console.log(dataLength)
+          /* let i = 0
+          let flag = 0
+          for (i in response.data) {
+            console.log(response.data[i])
+            state.purchasedcourse[response.data[i]._id] = {
+              name: response.data[i].Name
+            }
+            flag++
             console.log(i)
-            state.loader = false
-            state.patchUpdateDom = !state.patchUpdateDom
-          }
-        } */
+            if (flag === dataLength) {
+              console.log(i)
+              state.loader = false
+              state.patchUpdateDom = !state.patchUpdateDom
+            }
+          } */
+        }).catch(function (error) {
+          console.log(error)
+          state.patchUpdateDom = !state.patchUpdateDom
+        })
       }).catch(function (error) {
         console.log(error)
         state.patchUpdateDom = !state.patchUpdateDom
