@@ -169,10 +169,10 @@ const mutations = {
   gettrainingdata (state, payload) {
     console.log(payload)
     state.coursedata = {}
-    state.loader = true
     let idToken = localStorage.getItem('id_token')
     let decoded = jwtdecode(idToken)
     state.isAdmin = decoded['http://mz02testis_admin']
+    state.loader = true
     let url1 = ServerUrl.url
     let deployUrl = url1 + 'gettrainingdata'
     axios.get(deployUrl, {
