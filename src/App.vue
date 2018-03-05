@@ -5,7 +5,7 @@
 
         <button
             class="btn btn-primary btn-margin"
-            @click="Home()">
+            @click="Home(authenticated)">
               Home
           </button>
 
@@ -35,6 +35,7 @@
 
 <script>
 import AuthService from './auth/AuthService'
+import jwtdecode from 'jwt-decode'
 
 const auth = new AuthService()
 
@@ -54,8 +55,20 @@ export default {
   methods: {
     login,
     logout,
-    Home () {
-      this.$router.push('Home')
+    Home (x) {
+      let isLogin = x
+      if (isLogin) {
+        let idToken = localStorage.getItem('id_token')
+        let decoded = jwtdecode(idToken)
+        let isadmin = decoded['http://mz02testis_admin']
+        if (isadmin) {
+          this.$store.gen.state.goTo('/Admin')
+        } else {
+          this.$store.gen.state.goTo('/User')
+        }
+      } else {
+        this.$router.push('Home')
+      }
     }
   }
 }
