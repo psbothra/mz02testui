@@ -62,9 +62,9 @@ export default {
         let decoded = jwtdecode(idToken)
         let isadmin = decoded['http://mz02testis_admin']
         if (isadmin) {
-          this.$store.gen.state.goTo('/Admin')
+          this.$store.state.gen.goTo('/Admin')
         } else {
-          this.$store.gen.state.goTo('/User')
+          this.$store.state.gen.goTo('/User')
         }
       } else {
         this.$router.push('Home')
