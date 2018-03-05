@@ -8,6 +8,7 @@ const state = {
   firebaseApp: {},
   storage: {},
   coursedata: {},
+  isAdmin: null,
   purchasedcourse: {},
   patchUpdateDom: false,
   loader: false,
@@ -17,6 +18,7 @@ const state = {
 const getters = {
   btnLoader: state => state.btnLoader,
   loader: state => state.loader,
+  isAdmin: state => state.isAdmin,
   patchUpdateDom: state => state.patchUpdateDom,
   coursedata: state => state.coursedata,
   purchasedcourse: state => state.purchasedcourse
@@ -129,6 +131,10 @@ const mutations = {
   getdata (state) {
     state.loader = true
     state.coursedata = {}
+    let idToken = localStorage.getItem('id_token')
+    let decoded = jwtdecode(idToken)
+    state.isAdmin = decoded['http://mz02testis_admin']
+    console.log(state.isAdmin)
     let url1 = ServerUrl.url
     let deployUrl = url1 + 'getdata'
     axios.get(deployUrl)
@@ -164,6 +170,9 @@ const mutations = {
     console.log(payload)
     state.coursedata = {}
     state.loader = true
+    let idToken = localStorage.getItem('id_token')
+    let decoded = jwtdecode(idToken)
+    state.isAdmin = decoded['http://mz02testis_admin']
     let url1 = ServerUrl.url
     let deployUrl = url1 + 'gettrainingdata'
     axios.get(deployUrl, {

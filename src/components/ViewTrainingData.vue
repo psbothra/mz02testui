@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="authenticated">
+    <div v-if="authenticated && isAdmin">
     <br>
     <h2 align="center">
     Course Detail
@@ -194,7 +194,8 @@ export default {
         'btnLoader',
         'patchUpdateDom',
         'loader',
-        'coursedata'
+        'coursedata',
+        'isAdmin'
       ]),
       update_f1 () {
         this.f1 = this.$store.state.gen.f1

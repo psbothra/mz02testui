@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="authenticated">
+    <div v-if="authenticated && isAdmin">
     <loader v-if="loader"></loader>
     <div v-else>
     <div align="center">
@@ -90,7 +90,8 @@ export default {
         'btnLoader',
         'patchUpdateDom',
         'loader',
-        'coursedata'
+        'coursedata',
+        'isAdmin'
       ])
     },
     watch: {
