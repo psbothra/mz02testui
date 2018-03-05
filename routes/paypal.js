@@ -15,13 +15,14 @@ exports.paypalpayment = function(req, res) {
   let amount = req.query.amount
   let approval_url = ''
   let payment_executeurl = ''
+  let return_url = configVariables.ServerUrl.url + '/Orders'
   var create_payment_json = {
     "intent": "sale",
     "payer": {
         "payment_method": "paypal"
     },
     "redirect_urls": {
-        "return_url": configVariables.ServerUrl.url,
+        "return_url": return_url,
         "cancel_url": configVariables.ServerUrl.url
     },
     "transactions": [{

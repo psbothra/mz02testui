@@ -152,3 +152,29 @@ exports.uploaddata = function (req, res) {
             });
           });
         }
+
+        exports.insertorders = function (req, res) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          let name = req.query.name
+          let emailId = req.query.emailId
+          let token = req.query.token
+          let paymentId = req.query.paymentId
+          let PayerID = req.query.PayerID
+
+          MongoClient.connect(uri, function(err, client) {
+            client.db('mz02test').collection('testing').insertOne({Name: name}).then(docs => {
+              console.log(docs)
+              res.send('Hello')
+            });
+          });
+        }
+
+        exports.getorders = function (req, res) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          MongoClient.connect(uri, function(err, client) {
+            client.db('mz02test').collection('testing').insertOne({Name: name}).then(docs => {
+              console.log(docs)
+              res.send('Hello')
+            });
+          });
+        }

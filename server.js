@@ -45,6 +45,12 @@ var paypallocation = require('./routes/paypal')
   //delete course_data from database
   app.get('/deletedata', dblocation.deletedata)
 
+  //delete course_data from database
+  app.get('/getorders', dblocation.getorders)
+
+  //delete course_data from database
+  app.get('/insertorders', dblocation.insertorders)
+
   //paypal payment
   app.get('/paypalpayment', paypallocation.paypalpayment)
 

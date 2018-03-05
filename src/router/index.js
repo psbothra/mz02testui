@@ -10,6 +10,7 @@ import ViewTrainingData from '@/components/ViewTrainingData'
 import AddData from '@/components/AddData'
 import Unauth from '@/components/Unauth'
 import ViewTrainingDataUser from '@/components/ViewTrainingDataUser'
+import Orders from '@/components/Orders'
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ export default new Router({
       path: '/AddData',
       name: 'AddData',
       component: AddData
+    },
+    {
+      path: '/Orders',
+      name: 'Orders',
+      component: Orders
     }
   ]
 })
