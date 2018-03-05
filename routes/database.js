@@ -161,21 +161,22 @@ exports.uploaddata = function (req, res) {
           let PayerID = req.query.PayerID
 
           MongoClient.connect(uri, function(err, client) {
-            client.db('mz02test').collection('testing').insertOne({Name: name, EmailId: emailId, PaymentId: paymentId,
-              orders: [paymentId]})
+            client.db('mz02test').collection('testing').insertOne({Name: name, EmailId: emailId, PaymentId: paymentId})
             .then(docs => {
-              console.log(docs)
-              res.send('Hello')
+              console.log(docs.ops)
+              client.close();
+              res.send(docs.ops)
             });
           });
         }
 
         exports.getorders = function (req, res) {
           res.setHeader('Access-Control-Allow-Origin', '*');
+          let name = req.query.name
           MongoClient.connect(uri, function(err, client) {
-            client.db('mz02test').collection('testing').insertOne({Name: name}).then(docs => {
+            client.db('mz02test').collection('testing').findOne({Name: name}).then(docs => {
               console.log(docs)
-              res.send('Hello')
+              res.send(docs)
             });
           });
         }

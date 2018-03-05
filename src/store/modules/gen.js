@@ -373,24 +373,12 @@ const mutations = {
       let deployUrl = url + 'getorders'
       axios.get(deployUrl).then(function (response) {
         console.log(response.data)
-        let dataLength = response.data.length
-        console.log(dataLength)
-        let i = 0
-        let flag = 0
-        for (i in response.data) {
-          console.log(response.data[i])
-          state.purchasedcourse[response.data[i]._id] = {
-            name: response.data[i].Name
-          }
-          flag++
-          console.log(i)
-          if (flag === dataLength) {
-            console.log(i)
-            state.loader = false
-            state.patchUpdateDom = !state.patchUpdateDom
-          }
-          //  console.log(state.coursedata)
+        state.purchasedcourse[response.data._id] = {
+          name: response.data.Name
         }
+        state.loader = false
+        state.patchUpdateDom = !state.patchUpdateDom
+        //  console.log(state.coursedata)
       }).catch(function (error) {
         console.log(error)
         state.patchUpdateDom = !state.patchUpdateDom
@@ -404,45 +392,24 @@ const mutations = {
       let emailId = decoded.email
       let name = decoded.nickname
       console.log(emailId + '@@@' + name + '$$$$' + idToken)
-      let getname = url + 'getpaymentdetails'
-      axios.get(getname, {
+
+      let deployUrl = url + 'insertorders'
+      axios.get(deployUrl, {
         params: {
-          paymentId: paymentId
+          paymentId: paymentId,
+          token: token,
+          PayerID: PayerID,
+          emailId: emailId,
+          name: name
         }
       }).then(function (response) {
         console.log(response.data)
-        let deployUrl = url + 'insertorders'
-        axios.get(deployUrl, {
-          params: {
-            paymentId: paymentId,
-            token: token,
-            PayerID: PayerID,
-            emailId: emailId,
-            name: name
-          }
-        }).then(function (response) {
-          console.log(response.data)
-          let dataLength = response.data.length
-          console.log(dataLength)
-          /* let i = 0
-          let flag = 0
-          for (i in response.data) {
-            console.log(response.data[i])
-            state.purchasedcourse[response.data[i]._id] = {
-              name: response.data[i].Name
-            }
-            flag++
-            console.log(i)
-            if (flag === dataLength) {
-              console.log(i)
-              state.loader = false
-              state.patchUpdateDom = !state.patchUpdateDom
-            }
-          } */
-        }).catch(function (error) {
-          console.log(error)
-          state.patchUpdateDom = !state.patchUpdateDom
-        })
+
+        state.purchasedcourse[response.data._id] = {
+          name: response.data.Name
+        }
+        state.loader = false
+        state.patchUpdateDom = !state.patchUpdateDom
       }).catch(function (error) {
         console.log(error)
         state.patchUpdateDom = !state.patchUpdateDom
