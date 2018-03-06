@@ -20,6 +20,6 @@ exports.ServerUrl = {
 
 exports.PaypalConfig = {
   mode: 'sandbox', // sandbox or live
-  client_id: 'ATDNQPz2AJJYhKnZm3JNR95USchOiA4fiu13nf1nIEBgAH0m0eldDeoQAavFVOw5TzXw8lzIu5FarqT9',
-  client_secret: 'EObV2bW94PsCduBhJO3ey03qySxr6f_3w70HkAtEnkNzwglMbiU7oAciaqBNhZQJNYD7OxVBuiPTKK90'
+  client_id: 'AVRCLZXmvLLGK2SxT9OdBLylpfCjR4ZorEefRE7ALTTbKu5FHDAHM8KQNGML8KKREDLqpVZHEcjDXKjX',
+  client_secret: 'EJZKiGTCIOcTSqGYGqCr8_wpwdaUb3lO581TAJFSYMwUalCJGQRdHanu2DQIXYreqdQ8QTHDG8fhdpfh'
 }
