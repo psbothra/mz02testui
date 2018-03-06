@@ -426,9 +426,8 @@ const mutations = {
             emailId: response.data[i].EmailId
           }
           flag++
-          console.log(i)
+          console.log(state.purchasedcourse)
           if (flag === dataLength) {
-            console.log(i)
             state.loader = false
             state.patchUpdateDom = !state.patchUpdateDom
           }
