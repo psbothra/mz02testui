@@ -9,19 +9,32 @@
         The training data is fetched from the database mongodb.
     </h4>
 
-    <!--  hello -->
-
-
   </div>
 </div>
 </template>
 
 <script>
 
+import {ServerUrl} from '../variables/config'
+import axios from 'axios'
+
 export default {
+
   data () {
     return {}
-  }}
+  },
+  created () {
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'getblog'
+    axios.get(deployUrl)
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+  }
+}
 </script>
 <style scoped>
 

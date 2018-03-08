@@ -10,6 +10,7 @@ var port = process.env.PORT || 5000;
 var vimeolocation = require('./routes/vimeoAPI')
 var dblocation = require('./routes/database')
 var paypallocation = require('./routes/paypal')
+var bloglocation = require('./routes/blog')
 // var doclocation = require('./routes/firebasestorage')
 
   // create upload request to vimeo
@@ -56,6 +57,9 @@ var paypallocation = require('./routes/paypal')
 
   // retrieve paypal payment details
   app.get('/getpaymentdetails', paypallocation.getpaymentdetails)
+
+  //retrieve data from database
+  app.get('/getblog', bloglocation.getblog)
 
 app.listen(port);
 console.log('server started '+ port);
