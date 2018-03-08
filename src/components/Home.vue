@@ -8,7 +8,7 @@
         The login button authenticates the user with the API auth0.<br> And there you have access to the documents and the videos.<br>
         The training data is fetched from the database mongodb.
     </h4>
-<div>
+<div>Blog
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
         <v-expansion-panel-content hide-actions  v-for="(slide,k) in blog" :key="k" >
