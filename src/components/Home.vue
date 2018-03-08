@@ -9,31 +9,47 @@
         The training data is fetched from the database mongodb.
     </h4>
 
+    <v-layout>
+      <v-expansion-panel class="expansion-panel-remove-shadow" inset>
+        <v-expansion-panel-content hide-actions  v-for="(slide,k) in blog" :key="k" >
+          <div slot="header">
+            <div>
+              <v-layout>
+                <v-flex>
+                  <v-card-title primary-title>
+                    <div>
+                      <div class="headline mb-0">{{slide.title}}</div>
+                      <div>{{slide.content}} </div>
+                    </div>
+                  </v-card-title>
+                </v-flex>
+              </v-layout>
+            </div>
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-layout>
+
   </div>
 </div>
 </template>
 
 <script>
-
-import {ServerUrl} from '../variables/config'
-import axios from 'axios'
+  import {mapGetters} from 'vuex'
 
 export default {
 
-  data () {
-    return {}
-  },
-  created () {
-    let url1 = ServerUrl.url
-    let deployUrl = url1 + 'getblog'
-    axios.get(deployUrl)
-      .then(response => {
-        console.log(response.data)
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
-  }
+    data () {
+      return {}
+    },
+    computed: {
+      ...mapGetters([
+        'blog'
+      ])
+    },
+    created () {
+      this.$store.commit('getblog')
+    }
 }
 </script>
 <style scoped>

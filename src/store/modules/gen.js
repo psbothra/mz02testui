@@ -21,7 +21,8 @@ const getters = {
   isAdmin: state => state.isAdmin,
   patchUpdateDom: state => state.patchUpdateDom,
   coursedata: state => state.coursedata,
-  purchasedcourse: state => state.purchasedcourse
+  purchasedcourse: state => state.purchasedcourse,
+  blog: state => state.blog
 }
 
 const mutations = {
@@ -163,6 +164,27 @@ const mutations = {
         console.log(error)
         state.loader = false
         state.patchUpdateDom = !state.patchUpdateDom
+      })
+  },
+
+  getblog (state) {
+    state.blog = {}
+    let url1 = ServerUrl.url
+    let deployUrl = url1 + 'getblog'
+    axios.get(deployUrl)
+      .then(function (response) {
+        console.log(response.data)
+        let i = 0
+        for (i in response.data) {
+          console.log(response.data[i])
+          state.blog[response.data._id] = {
+            title: response.data[i].title,
+            content: response.data[i].content
+          }
+        }
+      })
+      .catch(e => {
+        console.log(e)
       })
   },
 
