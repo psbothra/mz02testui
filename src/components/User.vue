@@ -14,6 +14,7 @@
           You are not logged in! Please Log In to continue.
         </h4>
       </div>
+      <div>Blog
       <v-layout>
         <v-expansion-panel class="expansion-panel-remove-shadow" inset>
           <v-expansion-panel-content hide-actions  v-for="(slide,k) in coursedata" :key="k" >
@@ -36,6 +37,7 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-layout>
+    </div>
   </div>
 </div>
 <div v-else>

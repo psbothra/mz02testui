@@ -176,7 +176,6 @@ const mutations = {
         console.log(response.data)
         let i = 0
         for (i in response.data) {
-          console.log(response.data[i])
           state.blog[response.data._id] = {
             title: response.data[i].title,
             content: response.data[i].content
