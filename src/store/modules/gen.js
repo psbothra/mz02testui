@@ -184,7 +184,7 @@ const mutations = {
             title: response.data[i].title,
             content: response.data[i].content
           }
-          //  console.log(state.coursedata)
+          console.log(state.blog)
         }
       })
       .catch(e => {
