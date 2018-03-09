@@ -10,11 +10,12 @@
         The training data is fetched from the database mongodb.
     </h4>
 <div>
-  <h1> Blog Section<br><br>
+</br></br>
+  <h1> Blog Section</h1>
+  </br></br>
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
         <v-expansion-panel-content hide-actions  v-for="(slide,k) in blog" :key="k" >
-          <div>test</div>
           <div slot="header">
             <div>
               <v-layout>

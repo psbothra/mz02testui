@@ -193,9 +193,8 @@ const mutations = {
             state.loader = false
             state.patchUpdateDom = !state.patchUpdateDom
           }
-          console.log(state.blog)
         }
-        console.log(state.loader)
+        console.log(state.blog)
       })
       .catch(e => {
         console.log(e)
