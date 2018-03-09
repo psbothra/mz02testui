@@ -58,7 +58,7 @@ var bloglocation = require('./routes/blog')
   // retrieve paypal payment details
   app.get('/getpaymentdetails', paypallocation.getpaymentdetails)
 
-  //retrieve data from database
+  //retrieve blog
   app.get('/getblog', bloglocation.getblog)
 
 app.listen(port);

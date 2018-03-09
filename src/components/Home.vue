@@ -11,7 +11,7 @@
     </h4>
 <div>
 </br></br>
-  <h1> Blog Section</h1>
+  <h1> Blog Section(Blogger)</h1>
   </br></br>
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
