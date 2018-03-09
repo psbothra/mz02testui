@@ -9,6 +9,7 @@
         The training data is fetched from the database mongodb.
     </h4>
 <div>
+  <loader v-if="loader"></loader>
   <h1> Blog Section<br><br>
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
@@ -38,14 +39,19 @@
 
 <script>
   import {mapGetters} from 'vuex'
+  import loader from '@/components/gen/loader'
 
 export default {
 
     data () {
       return {}
     },
+    components: {
+      loader
+    },
     computed: {
       ...mapGetters([
+        'loader',
         'blog'
       ])
     },
@@ -55,5 +61,7 @@ export default {
 }
 </script>
 <style scoped>
-
+a {
+  cursor: pointer;
+}
 </style>

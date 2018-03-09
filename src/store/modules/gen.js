@@ -177,12 +177,20 @@ const mutations = {
         let dataLength = response.data.length
         console.log(dataLength)
         let i = 0
+        let flag = 0
         for (i in response.data) {
           console.log(response.data[i].title)
           console.log(response.data[i].content)
           state.blog[response.data._id] = {
             title: response.data[i].title,
             content: response.data[i].content
+          }
+          flag++
+          console.log(i)
+          if (flag === dataLength) {
+            console.log(i)
+            state.loader = false
+            state.patchUpdateDom = !state.patchUpdateDom
           }
           console.log(state.blog)
         }
