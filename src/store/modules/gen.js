@@ -169,6 +169,7 @@ const mutations = {
   },
 
   getblog (state) {
+    state.loader = true
     state.blog = {}
     let url1 = ServerUrl.url
     let deployUrl = url1 + 'getblog'
