@@ -181,7 +181,7 @@ const mutations = {
         for (i in response.data) {
           console.log(response.data[i].title)
           console.log(response.data[i].content)
-          state.blog[response.data._id] = {
+          state.blog[response.data[i]._id] = {
             title: response.data[i].title,
             content: response.data[i].content
           }
@@ -194,6 +194,7 @@ const mutations = {
           }
           console.log(state.blog)
         }
+        console.log(state.loader)
       })
       .catch(e => {
         console.log(e)

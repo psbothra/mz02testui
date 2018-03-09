@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loader v-if="loader"></loader>
     <div class= "pb-5 pt-5" align="center">
       <h1> This is for demo purpose<br><br>
       </h1>
@@ -9,7 +10,6 @@
         The training data is fetched from the database mongodb.
     </h4>
 <div>
-  <loader v-if="loader"></loader>
   <h1> Blog Section<br><br>
     <v-layout>
       <v-expansion-panel class="expansion-panel-remove-shadow" inset>
