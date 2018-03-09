@@ -158,7 +158,7 @@ const mutations = {
             state.loader = false
             state.patchUpdateDom = !state.patchUpdateDom
           }
-          //  console.log(state.coursedata)
+          console.log(state.coursedata)
         }
       })
       .catch(function (error) {
