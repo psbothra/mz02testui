@@ -177,9 +177,9 @@ const mutations = {
       .then(function (response) {
         let dataLength = response.data.length
         console.log(dataLength)
-        let i = 0
+        let i = 1
         let flag = 0
-        for (; i++; i <= dataLength) {
+        for (i in response.data) {
           console.log(response.data[i].title)
           console.log(response.data[i].content)
           state.blog[response.data[i]._id] = {
@@ -197,7 +197,9 @@ const mutations = {
         console.log(state.blog)
       })
       .catch(e => {
-        console.log(e)
+        console.log(error)
+        state.loader = false
+        state.patchUpdateDom = !state.patchUpdateDom
       })
   },
 
