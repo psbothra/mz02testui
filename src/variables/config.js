@@ -23,3 +23,12 @@ exports.PaypalConfig = {
   client_id: 'AVRCLZXmvLLGK2SxT9OdBLylpfCjR4ZorEefRE7ALTTbKu5FHDAHM8KQNGML8KKREDLqpVZHEcjDXKjX',
   client_secret: 'EJZKiGTCIOcTSqGYGqCr8_wpwdaUb3lO581TAJFSYMwUalCJGQRdHanu2DQIXYreqdQ8QTHDG8fhdpfh'
 }
+
+exports.BlogConfig = {
+  key: 'AIzaSyAICKd9ZshQODOS2DolqeNWn_xsMxMT0Yg',
+  blogId: '5549961001171243004'
+}
+
+exports.DatabaseConfig = {
+  uri: 'mongodb://mz02test:kI7bgRc05v4A3NuN@cluster0-shard-00-00-hbfug.mongodb.net:27017,cluster0-shard-00-01-hbfug.mongodb.net:27017,cluster0-shard-00-02-hbfug.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'
+}

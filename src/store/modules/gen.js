@@ -179,7 +179,7 @@ const mutations = {
         console.log(dataLength)
         let i = 0
         let flag = 0
-        for (i in response.data) {
+        for (; i++; i <= dataLength) {
           console.log(response.data[i].title)
           console.log(response.data[i].content)
           state.blog[response.data[i]._id] = {
