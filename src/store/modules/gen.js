@@ -184,7 +184,7 @@ const mutations = {
           console.log(response.data[i].title)
           console.log(response.data[i].content)
           let x = response.data[i].content
-          let y = x.textContent
+          let y = x.replace(/<[^>]*>/g, '')
           console.log(y)
           state.blog[response.data[i].id] = {
             title: response.data[i].title,
