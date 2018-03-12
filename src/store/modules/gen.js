@@ -175,9 +175,10 @@ const mutations = {
     let deployUrl = url1 + 'getblog'
     axios.get(deployUrl)
       .then(function (response) {
+        console.log(response.data)
         let dataLength = response.data.length
         console.log(dataLength)
-        let i = 1
+        let i = 0
         let flag = 0
         for (i in response.data) {
           console.log(response.data[i].title)
