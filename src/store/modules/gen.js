@@ -175,9 +175,9 @@ const mutations = {
     let deployUrl = url1 + 'getblog'
     axios.get(deployUrl)
       .then(function (response) {
-        console.log(response.data)
         let dataLength = response.data.length
         console.log(dataLength)
+        console.log(response.data)
         let i = 0
         let flag = 0
         for (i in response.data) {
@@ -198,7 +198,7 @@ const mutations = {
         console.log(state.blog)
       })
       .catch(e => {
-        console.log(error)
+        console.log(e)
         state.loader = false
         state.patchUpdateDom = !state.patchUpdateDom
       })
