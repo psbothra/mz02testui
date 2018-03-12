@@ -188,7 +188,7 @@ const mutations = {
           console.log(y)
           state.blog[response.data[i].id] = {
             title: response.data[i].title,
-            content: response.data[i].content
+            content: y
           }
           flag++
           console.log(i)
