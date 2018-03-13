@@ -37,7 +37,7 @@
   </div>
   <div class="comments">
    <h4>Comments</h4>
-    <vue-disqus shortname="mztest-1" :identifier="blog1" url="https://mz02test.herokuapp.com/"></vue-disqus>
+    <vue-disqus shortname="mztest-1" :identifier="id1" url="https://mz02test.herokuapp.com/"></vue-disqus>
   </div>
 </div>
 </template>
