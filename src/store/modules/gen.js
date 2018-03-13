@@ -181,12 +181,10 @@ const mutations = {
         let i = 0
         let flag = 0
         for (i in response.data) {
-          console.log(response.data[i].title)
-          console.log(response.data[i].content)
           let x = response.data[i].content
           let y = x.replace(/<[^>]*>/g, '')
-          console.log(y)
           state.blog[response.data[i].id] = {
+            id: response.data[i].id,
             title: response.data[i].title,
             content: y
           }

@@ -30,6 +30,10 @@
               </v-layout>
             </div>
           </div>
+          <div class="comments">
+        <h4>Comments</h4>
+         <vue-disqus shortname="mz02test-herokuapp" :identifier= slide.id url="http://localhost:5000/Home"></vue-disqus>
+       </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-layout>
@@ -41,6 +45,7 @@
 <script>
   import {mapGetters} from 'vuex'
   import loader from '@/components/gen/loader'
+  import VueDisqus from 'vue-disqus/VueDisqus.vue'
 
 export default {
 
@@ -48,7 +53,8 @@ export default {
       return {}
     },
     components: {
-      loader
+      loader,
+      VueDisqus
     },
     computed: {
       ...mapGetters([

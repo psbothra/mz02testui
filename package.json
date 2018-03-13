@@ -26,6 +26,7 @@
     "stylus-loader": "^3.0.1",
     "vimeo": "^2.0.0",
     "vue": "^2.5.2",
+    "vue-disqus": "^2.0.4",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.1",
     "vuex": "^3.0.1"
